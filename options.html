@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configuration Complète</title>
+  <link rel="stylesheet" href="options.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="libs/marked.min.js"></script>
+  <script src="libs/purify.min.js"></script>
+  <script defer src="options.js"></script>
+</head>
+
+<body>
+  <div id="mainContainer">
+    <!-- Colonne 0 : Liste des configurations -->
+    <div id="configListContainer">
+      <button id="addConfigButton"><i class="fas fa-plus"></i> Créer</button>
+      <ul id="configList"></ul>
+    </div>
+
+    <!-- Colonne 1 : Liste des fonctionnalités -->
+    <div id="featureListContainer">
+      <ul id="featureList"></ul>
+    </div>
+
+    <!-- Colonne optionnelle -->
+    <div id="optionalColumnContainer">
+      <div id="optionalColumnContent">
+      </div>
+    </div>
+
+    <!-- Dernière Colonne : Détail de la fonctionnalité -->
+    <div id="detailsContainer">
+      <div id="detailsContent">
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

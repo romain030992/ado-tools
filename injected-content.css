@@ -1,0 +1,68 @@
+#story-points-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.puce{
+    display: inline-block;
+    padding: 5px 10px;
+    text-align: center;
+    color: #fff;
+    border-radius: 15px;
+}
+
+.bowtie-symbol-task::before {
+    color: var(--dynamic-color);
+}
+
+#filterButtonsContainer button.bolt-button {
+    margin-right: 10px;
+}
+
+.custom-dropdown {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    list-style: none;
+    padding: 3px 0;
+    margin: 0;
+    z-index: 1000;
+    width: 200px;
+    border-radius: 4px;
+}
+
+.custom-dropdown.hidden {
+    display: none;
+}
+
+.custom-dropdown-item {
+    cursor: pointer;
+}
+
+.custom-dropdown-item button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.custom-dropdown-item button:hover {
+    background-color: #f0f0f0;
+}
+
+.ms-ContextualMenu-icon {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.ms-ContextualMenu-itemText {
+    font-size: 14px;
+    color: #333;
+}
