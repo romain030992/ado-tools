@@ -1,26 +1,42 @@
 {
     "manifest_version": 3,
-    "name": "Azure DevOps Sprint Backlog Statistics",
+    "name": "Azure DevOps Tools",
     "version": "1.0",
-    "description": "Une extension Chrome pour afficher les statistiques des tâches de sprint dans Azure DevOps",
+    "description": "Boîte à outils Azure DevOps",
     "permissions": ["tabs", "scripting", "activeTab", "storage"],
     "host_permissions": ["https://dev.azure.com/*"],
+    "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:;"
+    },
     "background": {
-      "service_worker": "background.js"
+      "service_worker": "background/background.js",
+      "type": "module"
     },
     "action": {
-      "default_popup": "popup.html",
+      "default_popup": "popup/popup.html",
       "default_icon": {
         "16": "icon.png",
         "48": "icon.png",
         "128": "icon.png"
       }
     },
+    "options_page": "options/options.html",
     "web_accessible_resources": [
         {
             "resources": [
                 "libs/marked.min.js",
-                "libs/purify.min.js"
+                "libs/purify.min.js",
+                "features/core/*.js",
+                "features/better-wiki/*.js",
+                "features/better-wiki/helpers/*.js",
+                "features/quick-filter/*.js",
+                "features/quick-filter/helpers/*.js",
+                "features/status-aggregation/*.js",
+                "features/status-aggregation/helpers/*.js",
+                "features/task-drift/*.js",
+                "features/task-drift/helpers/*.js",
+                "assets/fontawesome.min.css",
+                "assets/fonts/*"
             ],
             "matches": ["<all_urls>"]
         }
