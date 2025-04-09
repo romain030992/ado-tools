@@ -1,0 +1,257 @@
+/* Styles for Status Aggregation Details component */
+
+.status-aggregation-details .feature-enable-switch {
+  border-left: 4px solid #4caf50;
+}
+
+/* Status configuration panel */
+.status-aggregation-details .status-panel {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-m);
+  padding: var(--space-m);
+  margin-bottom: var(--space-l);
+}
+
+.status-aggregation-details .status-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-m);
+}
+
+.status-aggregation-details .status-panel-title {
+  font-size: var(--font-size-medium);
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Status item list */
+.status-aggregation-details .status-list {
+  margin-top: var(--space-m);
+}
+
+.status-aggregation-details .status-item {
+  display: flex;
+  align-items: center;
+  padding: var(--space-m);
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-s);
+  margin-bottom: var(--space-s);
+}
+
+.status-aggregation-details .status-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: var(--space-s);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.status-aggregation-details .status-name {
+  font-weight: 500;
+  flex: 1;
+}
+
+.status-aggregation-details .status-options {
+  display: flex;
+  align-items: center;
+}
+
+.status-aggregation-details .status-option-label {
+  margin-right: var(--space-s);
+  color: var(--text-medium);
+  font-size: var(--font-size-small);
+}
+
+/* Status indicator preview */
+.status-aggregation-details .preview-section {
+  margin-top: var(--space-l);
+  padding: var(--space-m);
+  background-color: rgba(76, 175, 80, 0.05);
+  border-radius: var(--border-radius-m);
+  border: 1px dashed rgba(76, 175, 80, 0.3);
+}
+
+.status-aggregation-details .preview-title {
+  font-size: var(--font-size-medium);
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: var(--space-m);
+  color: #2e7d32;
+}
+
+.status-aggregation-details .preview-description {
+  margin-bottom: var(--space-m);
+  color: var(--text-medium);
+}
+
+.status-aggregation-details .preview-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+}
+
+/* Status puce preview */
+.status-aggregation-details .puce-preview {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+}
+
+.status-aggregation-details .puce {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  background-color: var(--neutral-color);
+}
+
+.status-aggregation-details .puce-success {
+  background-color: var(--success-color);
+}
+
+.status-aggregation-details .puce-warning {
+  background-color: var(--warning-color);
+}
+
+.status-aggregation-details .puce-danger {
+  background-color: var(--danger-color);
+}
+
+.status-aggregation-details .puce-label {
+  font-size: var(--font-size-base);
+}
+
+/* Status position settings */
+.status-aggregation-details .position-settings {
+  margin-top: var(--space-l);
+}
+
+.status-aggregation-details .position-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-m);
+  margin-top: var(--space-m);
+}
+
+.status-aggregation-details .position-option {
+  cursor: pointer;
+}
+
+.status-aggregation-details .position-preview {
+  height: 100px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-s);
+  padding: var(--space-s);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-s);
+}
+
+.status-aggregation-details .position-preview.selected {
+  border-color: var(--primary-color);
+  background-color: rgba(0, 120, 212, 0.05);
+}
+
+.status-aggregation-details .position-preview-puce {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  position: absolute;
+}
+
+.status-aggregation-details .position-preview-label {
+  width: 70%;
+  height: 10px;
+  background-color: var(--border-color);
+}
+
+.status-aggregation-details .position-name {
+  text-align: center;
+  font-size: var(--font-size-small);
+  font-weight: 500;
+}
+
+.status-aggregation-details .position-top-left .position-preview-puce {
+  top: var(--space-s);
+  left: var(--space-s);
+}
+
+.status-aggregation-details .position-top-right .position-preview-puce {
+  top: var(--space-s);
+  right: var(--space-s);
+}
+
+.status-aggregation-details .position-bottom-left .position-preview-puce {
+  bottom: var(--space-s);
+  left: var(--space-s);
+}
+
+.status-aggregation-details .position-bottom-right .position-preview-puce {
+  bottom: var(--space-s);
+  right: var(--space-s);
+}
+
+/* Advanced settings section */
+.status-aggregation-details .advanced-settings {
+  margin-top: var(--space-l);
+}
+
+.status-aggregation-details .advanced-toggle {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  padding: 0;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  cursor: pointer;
+}
+
+.status-aggregation-details .advanced-toggle i {
+  transition: transform var(--transition-fast);
+}
+
+.status-aggregation-details .advanced-toggle.expanded i {
+  transform: rotate(180deg);
+}
+
+.status-aggregation-details .advanced-content {
+  margin-top: var(--space-m);
+  padding: var(--space-m);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-s);
+  background-color: #f9f9f9;
+}
+
+.status-aggregation-details .advanced-field {
+  margin-bottom: var(--space-m);
+}
+
+.status-aggregation-details .advanced-field:last-child {
+  margin-bottom: 0;
+}
+
+.status-aggregation-details .advanced-field label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  font-weight: 500;
+}
+
+.status-aggregation-details .advanced-field-help {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-small);
+  color: var(--text-medium);
+}

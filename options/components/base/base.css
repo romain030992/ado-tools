@@ -1,0 +1,449 @@
+/* Base styles for all components */
+:root {
+  /* Color palette */
+  --primary-color: #0078d4;
+  --primary-hover: #106ebe;
+  --success-color: #107c10;
+  --success-hover: #0b6a0b;
+  --danger-color: #d13438;
+  --danger-hover: #a4262c;
+  --warning-color: #ff8c00;
+  --neutral-color: #605e5c;
+  --background-light: #f9f9f9;
+  --border-color: #e0e0e0;
+  --hover-color: #f0f0f0;
+  --text-dark: #323130;
+  --text-medium: #605e5c;
+  --text-light: #a19f9d;
+  
+  /* Spacing */
+  --space-xs: 4px;
+  --space-s: 8px;
+  --space-m: 16px;
+  --space-l: 24px;
+  --space-xl: 32px;
+  
+  /* Typography */
+  --font-size-small: 12px;
+  --font-size-base: 14px;
+  --font-size-medium: 16px;
+  --font-size-large: 18px;
+  --font-size-xl: 24px;
+  
+  /* Effects */
+  --shadow-subtle: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --border-radius-s: 4px;
+  --border-radius-m: 6px;
+  --border-radius-l: 8px;
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+h1 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-l);
+}
+
+h2 {
+  font-size: var(--font-size-large);
+  margin-bottom: var(--space-m);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--border-color);
+}
+
+p {
+  margin-bottom: var(--space-m);
+  color: var(--text-medium);
+}
+
+/* Form elements */
+input, select, textarea, button {
+  font-family: inherit;
+  font-size: var(--font-size-base);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+select,
+textarea {
+  width: 100%;
+  padding: var(--space-s) var(--space-m);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-s);
+  transition: border-color var(--transition-fast);
+  box-sizing: border-box;
+  margin-bottom: var(--space-m);
+  background-color: white;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.2);
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+input[type="color"] {
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-s);
+  cursor: pointer;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border-radius: var(--border-radius-s);
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: var(--border-radius-s);
+}
+
+input[type="color"]::-moz-color-swatch {
+  border: none;
+  border-radius: var(--border-radius-s);
+}
+
+/* Button styles */
+button, .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-s) var(--space-m);
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-s);
+  color: var(--text-dark);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+  gap: 8px;
+}
+
+button:hover, .button:hover {
+  background-color: var(--hover-color);
+}
+
+button:focus, .button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.2);
+}
+
+button:active, .button:active {
+  transform: translateY(1px);
+}
+
+/* Button variations */
+button.primary, .button.primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+button.primary:hover, .button.primary:hover {
+  background-color: var(--primary-hover);
+}
+
+button.success, .button.success {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+  color: white;
+}
+
+button.success:hover, .button.success:hover {
+  background-color: var(--success-hover);
+}
+
+button.danger, .button.danger {
+  background-color: var(--danger-color);
+  border-color: var(--danger-color);
+  color: white;
+}
+
+button.danger:hover, .button.danger:hover {
+  background-color: var(--danger-hover);
+}
+
+button.outline, .button.outline {
+  background-color: transparent;
+}
+
+button.outline.primary, .button.outline.primary {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+button.outline.danger, .button.outline.danger {
+  border-color: var(--danger-color);
+  color: var(--danger-color);
+}
+
+button.outline:hover, .button.outline:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+button.icon, .button.icon {
+  padding: var(--space-xs);
+  min-width: 32px;
+  min-height: 32px;
+}
+
+/* Utils */
+.text-center {
+  text-align: center;
+}
+
+.spacer {
+  margin-bottom: var(--space-m);
+}
+
+.spacer-lg {
+  margin-bottom: var(--space-l);
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.gap-s {
+  gap: var(--space-s);
+}
+
+.gap-m {
+  gap: var(--space-m);
+}
+
+.w-full {
+  width: 100%;
+}
+
+/* Form groups */
+.form-group {
+  margin-bottom: var(--space-m);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.form-group .help-text {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-small);
+  color: var(--text-medium);
+}
+
+/* Switches */
+.switch-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-m);
+  cursor: pointer;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  margin-right: var(--space-m);
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+}
+
+.switch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: var(--transition-base);
+  border-radius: 34px;
+}
+
+.switch-slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: var(--transition-base);
+  border-radius: 50%;
+}
+
+input:checked + .switch-slider {
+  background-color: var(--primary-color);
+}
+
+input:focus + .switch-slider {
+  box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.2);
+}
+
+input:checked + .switch-slider:before {
+  transform: translateX(20px);
+}
+
+.switch-label {
+  display: flex;
+  flex-direction: column;
+}
+
+.switch-label-text {
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.switch-label-description {
+  font-size: var(--font-size-small);
+  color: var(--text-medium);
+}
+
+/* Loading and empty states */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl);
+  text-align: center;
+  color: var(--text-medium);
+}
+
+.empty-state i {
+  font-size: 48px;
+  margin-bottom: var(--space-m);
+  color: var(--text-light);
+}
+
+.empty-state h3 {
+  margin-bottom: var(--space-s);
+  font-weight: 500;
+}
+
+.empty-state p {
+  max-width: 300px;
+}
+
+/* Common modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: white;
+  border-radius: var(--border-radius-m);
+  box-shadow: var(--shadow-medium);
+  width: 100%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-m);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h2 {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.modal-body {
+  padding: var(--space-m);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-s);
+  padding: var(--space-m);
+  border-top: 1px solid var(--border-color);
+}
+
+.hidden {
+  display: none;
+}
+
+/* Utility for animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn var(--transition-base);
+}
+
+.slide-in {
+  animation: slideIn var(--transition-base);
+}

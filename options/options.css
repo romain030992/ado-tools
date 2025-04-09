@@ -1,10 +1,26 @@
+/* Base styles for options page */
+@import url('components/base/base.css');
+
+/* Component-specific styles */
+@import url('components/config-list/config-list.css');
+@import url('components/feature-list/feature-list.css');
+@import url('components/feature-details/feature-details-base.css');
+@import url('components/feature-details/general-details.css');
+@import url('components/feature-details/status-aggregation-details.css');
+@import url('components/feature-details/task-drift-details.css');
+@import url('components/feature-details/quick-filter-details.css');
+@import url('components/feature-details/better-wiki-details.css');
+
+/* Layout styles */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
   display: flex;
   height: 100vh;
   overflow: hidden;
+  background-color: #f9f9f9;
+  color: #333;
 }
 
 h1 {
@@ -121,13 +137,14 @@ button.removeButton i {
 
 #configListContainer {
   width: 250px;
-  background-color: #f0f0f0; /* Light gray for the left zone */
-  border-right: 2px solid #ccc;
+  background-color: #f7f7f7;
+  border-right: 1px solid #e0e0e0;
   overflow-y: auto;
   transition: width 0.3s ease;
   resize: horizontal; /* Allow horizontal resizing */
   min-width: 150px;
   max-width: 400px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
 }
 
 #configListContainer.collapsed {
@@ -171,7 +188,7 @@ button.removeButton i {
 
 #detailsContainer {
   flex: 2;
-  padding: 20px;
+  padding: 20px 30px;
   overflow-y: auto;
   background-color: #ffffff; /* White for the right zone */
   display: flex;
@@ -246,8 +263,8 @@ person-item button i {
 
 #configListContainer, #featureListContainer {
   width: 250px;
-  background-color: #f0f0f0;
-  border-right: 2px solid #ccc;
+  background-color: #f7f7f7;
+  border-right: 1px solid #e0e0e0;
   overflow-y: auto;
 }
 
@@ -490,14 +507,16 @@ textarea {
 }
 
 #optionalColumnContainer {
-  display: none; /* Hide by default */
+  display: none;
+  width: 300px;
+  background-color: #f7f7f7;
+  overflow-y: auto;
+  border-left: 1px solid #e0e0e0;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.05);
 }
 
 #optionalColumnContainer.active {
-  display: block; /* Show when active */
-  overflow-y: auto;
-  background-color: #f9f9f9; /* Optional styling */
-  width: 300px; /* Set a width for the optional column */
+  display: block;
 }
 
 .template-list {
@@ -861,5 +880,25 @@ textarea {
   text-align: center;
   color: #666;
   font-style: italic;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  #mainContainer {
+    flex-direction: column;
+  }
+  
+  #configListContainer, 
+  #featureListContainer,
+  #optionalColumnContainer.active {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 35vh;
+  }
+  
+  #detailsContainer {
+    padding: 15px;
+  }
 }
 

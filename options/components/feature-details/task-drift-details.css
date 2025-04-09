@@ -1,0 +1,311 @@
+/* Styles for Task Drift Details component */
+
+.task-drift-details .feature-enable-switch {
+  border-left: 4px solid #ff9800;
+}
+
+/* Color configuration section */
+.task-drift-details .color-config-section {
+  margin-bottom: var(--space-l);
+}
+
+.task-drift-details .color-config-panel {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-m);
+  padding: var(--space-m);
+}
+
+.task-drift-details .color-group {
+  margin-bottom: var(--space-l);
+}
+
+.task-drift-details .color-group-title {
+  font-weight: 600;
+  margin-bottom: var(--space-s);
+  font-size: var(--font-size-medium);
+}
+
+.task-drift-details .color-group-description {
+  color: var(--text-medium);
+  margin-bottom: var(--space-m);
+}
+
+.task-drift-details .color-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-m);
+}
+
+.task-drift-details .color-label {
+  width: 100px;
+  font-weight: 500;
+  margin-right: var(--space-m);
+}
+
+.task-drift-details .color-preview {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--border-radius-s);
+  margin-right: var(--space-m);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.task-drift-details .color-picker-container {
+  position: relative;
+}
+
+.task-drift-details .color-value-text {
+  display: inline-block;
+  padding: var(--space-xs) var(--space-s);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-s);
+  font-family: 'Consolas', monospace;
+  margin-left: var(--space-s);
+  font-size: var(--font-size-small);
+  color: var(--text-medium);
+}
+
+/* Threshold settings */
+.task-drift-details .threshold-section {
+  margin-bottom: var(--space-l);
+}
+
+.task-drift-details .threshold-panel {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-m);
+  padding: var(--space-m);
+}
+
+.task-drift-details .threshold-description {
+  margin-bottom: var(--space-m);
+  color: var(--text-medium);
+}
+
+.task-drift-details .slider-container {
+  margin: var(--space-m) 0;
+}
+
+.task-drift-details .slider-with-labels {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: var(--space-m);
+}
+
+.task-drift-details .slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xs);
+}
+
+.task-drift-details .slider-title {
+  font-weight: 500;
+}
+
+.task-drift-details .slider-value {
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+.task-drift-details input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 5px;
+  background: #ddd;
+  outline: none;
+}
+
+.task-drift-details input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+.task-drift-details input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+.task-drift-details .slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.task-drift-details .slider-label {
+  font-size: var(--font-size-small);
+  color: var(--text-medium);
+}
+
+/* Preview section */
+.task-drift-details .preview-section {
+  margin-bottom: var(--space-l);
+}
+
+.task-drift-details .preview-card {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-m);
+  padding: var(--space-m);
+}
+
+.task-drift-details .preview-title {
+  font-weight: 600;
+  margin-bottom: var(--space-m);
+}
+
+.task-drift-details .preview-description {
+  color: var(--text-medium);
+  margin-bottom: var(--space-m);
+}
+
+.task-drift-details .preview-samples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-m);
+  margin-bottom: var(--space-m);
+}
+
+.task-drift-details .preview-sample {
+  flex-basis: calc(50% - var(--space-m));
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-s);
+  padding: var(--space-s);
+  position: relative;
+}
+
+.task-drift-details .sample-title {
+  font-weight: 500;
+  margin-bottom: var(--space-s);
+  font-size: var(--font-size-small);
+}
+
+.task-drift-details .sample-content {
+  display: flex;
+  align-items: center;
+}
+
+/* Task preview samples */
+.task-drift-details .task-preview {
+  background-color: #f9f9f9;
+  padding: var(--space-s);
+  border-radius: var(--border-radius-s);
+  width: 100%;
+}
+
+.task-drift-details .task-title {
+  font-weight: 500;
+  margin-bottom: var(--space-xs);
+}
+
+.task-drift-details .task-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-small);
+  color: var(--text-medium);
+}
+
+.task-drift-details .drift-indicator {
+  position: absolute;
+  top: var(--space-s);
+  right: var(--space-s);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.task-drift-details .drift-low {
+  background-color: #ffeb3b;
+}
+
+.task-drift-details .drift-medium {
+  background-color: #ff9800;
+}
+
+.task-drift-details .drift-high {
+  background-color: #f44336;
+}
+
+.task-drift-details .drift-extreme {
+  background-color: #9c27b0;
+}
+
+/* Advanced options section */
+.task-drift-details .options-section {
+  margin-bottom: var(--space-l);
+}
+
+.task-drift-details .options-panel {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-m);
+  padding: var(--space-m);
+}
+
+.task-drift-details .option-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-s) 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.task-drift-details .option-item:last-child {
+  border-bottom: none;
+}
+
+.task-drift-details .option-description {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-drift-details .option-title {
+  font-weight: 500;
+  margin-bottom: var(--space-xs);
+}
+
+.task-drift-details .option-detail {
+  font-size: var(--font-size-small);
+  color: var(--text-medium);
+}
+
+/* Reset section */
+.task-drift-details .reset-section {
+  margin-top: var(--space-l);
+}
+
+.task-drift-details .danger-zone {
+  background-color: rgba(244, 67, 54, 0.05);
+  border: 1px solid rgba(244, 67, 54, 0.2);
+  border-radius: var(--border-radius-m);
+  padding: var(--space-m);
+}
+
+.task-drift-details .danger-zone-title {
+  color: #d32f2f;
+  font-weight: 600;
+  margin-bottom: var(--space-s);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.task-drift-details .danger-zone-description {
+  color: var(--text-medium);
+  margin-bottom: var(--space-m);
+}

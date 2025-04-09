@@ -1,0 +1,243 @@
+/* Styles for Quick Filter Details component */
+
+.quick-filter-details .feature-enable-switch {
+  border-left: 4px solid #2196F3;
+}
+
+.quick-filter-details .filter-section {
+  margin-bottom: var(--space-l);
+}
+
+/* Filter people list */
+.quick-filter-details .people-list {
+  margin-top: var(--space-m);
+}
+
+.quick-filter-details .person-item {
+  display: flex;
+  align-items: center;
+  padding: var(--space-s);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-s);
+  margin-bottom: var(--space-s);
+  background-color: white;
+}
+
+.quick-filter-details .person-item:hover {
+  background-color: var(--background-light);
+}
+
+.quick-filter-details .person-icon {
+  background-color: #e1f5fe;
+  color: #03a9f4;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: var(--space-m);
+}
+
+.quick-filter-details .person-input {
+  flex: 1;
+  margin: 0;
+}
+
+.quick-filter-details .remove-person-btn {
+  background: none;
+  border: none;
+  color: var(--danger-color);
+  cursor: pointer;
+  padding: var(--space-xs);
+  margin-left: var(--space-xs);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quick-filter-details .remove-person-btn:hover {
+  background-color: rgba(209, 52, 56, 0.1);
+}
+
+.quick-filter-details .add-person-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+  padding: var(--space-s);
+  background-color: white;
+  border: 1px dashed var(--border-color);
+  border-radius: var(--border-radius-s);
+  color: var(--primary-color);
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color var(--transition-fast);
+}
+
+.quick-filter-details .add-person-btn:hover {
+  background-color: var(--background-light);
+}
+
+/* Filter options */
+.quick-filter-details .filter-options {
+  margin-top: var(--space-m);
+}
+
+.quick-filter-details .filter-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-s) 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.quick-filter-details .filter-option:last-child {
+  border-bottom: none;
+}
+
+.quick-filter-details .filter-option-label {
+  display: flex;
+  flex-direction: column;
+}
+
+.quick-filter-details .filter-option-text {
+  font-weight: 500;
+}
+
+.quick-filter-details .filter-option-description {
+  font-size: var(--font-size-small);
+  color: var(--text-medium);
+  margin-top: var(--space-xs);
+}
+
+/* Color sample box */
+.quick-filter-details .color-sample {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--border-radius-s);
+  display: inline-block;
+  margin-right: var(--space-s);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  vertical-align: middle;
+}
+
+.quick-filter-details .color-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-s);
+}
+
+.quick-filter-details .color-option label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.quick-filter-details .color-option input[type="radio"] {
+  margin-right: var(--space-s);
+}
+
+/* Custom filter settings */
+.quick-filter-details .custom-filter-panel {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-m);
+  padding: var(--space-m);
+  margin-top: var(--space-m);
+}
+
+.quick-filter-details .custom-filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-m);
+}
+
+.quick-filter-details .custom-filter-title {
+  font-size: var(--font-size-medium);
+  font-weight: 600;
+  margin: 0;
+}
+
+.quick-filter-details .custom-filter-fields {
+  margin-top: var(--space-m);
+}
+
+.quick-filter-details .field-row {
+  display: flex;
+  gap: var(--space-m);
+  margin-bottom: var(--space-m);
+  align-items: flex-end;
+}
+
+.quick-filter-details .field-item {
+  flex: 1;
+}
+
+.quick-filter-details .field-label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  font-weight: 500;
+}
+
+.quick-filter-details .field-control {
+  width: 100%;
+}
+
+/* Info card */
+.quick-filter-details .info-card {
+  background-color: #e3f2fd;
+  border-left: 4px solid #2196F3;
+  padding: var(--space-m);
+  margin: var(--space-m) 0;
+  border-radius: var(--border-radius-s);
+}
+
+.quick-filter-details .info-card-title {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+  color: #0d47a1;
+}
+
+.quick-filter-details .info-card-title i {
+  margin-right: var(--space-s);
+}
+
+.quick-filter-details .info-card-content {
+  color: #1565c0;
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+}
+
+/* Filter shortcut setting */
+.quick-filter-details .shortcut-setting {
+  margin-top: var(--space-m);
+}
+
+.quick-filter-details .keyboard-shortcut {
+  display: inline-block;
+  padding: var(--space-xs) var(--space-s);
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius-s);
+  font-family: 'Consolas', monospace;
+  margin-right: var(--space-xs);
+}
+
+.quick-filter-details .shortcut-container {
+  margin-top: var(--space-s);
+  display: flex;
+  align-items: center;
+}
+
+.quick-filter-details .shortcut-plus {
+  margin: 0 var(--space-xs);
+  color: var(--text-medium);
+}

@@ -1,0 +1,198 @@
+/* Styles for General Details component */
+
+.general-details .about-section {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-m);
+  padding: var(--space-l);
+  margin-bottom: var(--space-l);
+}
+
+.general-details .about-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-m);
+}
+
+.general-details .extension-logo {
+  width: 64px;
+  height: 64px;
+  margin-right: var(--space-l);
+  border-radius: var(--border-radius-s);
+  box-shadow: var(--shadow-subtle);
+}
+
+.general-details .extension-info h2 {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: var(--font-size-large);
+}
+
+.general-details .extension-info p {
+  margin: var(--space-xs) 0 0;
+  color: var(--text-medium);
+}
+
+.general-details .extension-meta {
+  display: flex;
+  gap: var(--space-l);
+  margin-top: var(--space-m);
+}
+
+.general-details .meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.general-details .meta-label {
+  font-size: var(--font-size-small);
+  color: var(--text-medium);
+  margin-bottom: var(--space-xs);
+}
+
+.general-details .meta-value {
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.general-details .extension-description {
+  line-height: 1.5;
+  margin-bottom: var(--space-m);
+}
+
+.general-details .actions-section {
+  margin-bottom: var(--space-l);
+}
+
+/* Sync settings */
+.general-details .sync-panel {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-m);
+  padding: var(--space-m);
+  margin-bottom: var(--space-l);
+}
+
+.general-details .sync-options {
+  margin-top: var(--space-m);
+}
+
+.general-details .sync-option {
+  margin-bottom: var(--space-m);
+}
+
+.general-details .sync-option:last-child {
+  margin-bottom: 0;
+}
+
+.general-details .sync-option label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.general-details .sync-option input[type="radio"] {
+  margin-right: var(--space-s);
+}
+
+.general-details .sync-option-text {
+  font-weight: 500;
+}
+
+.general-details .sync-option-description {
+  margin-left: var(--space-l);
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-small);
+  color: var(--text-medium);
+}
+
+/* Import/Export section */
+.general-details .import-export-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-m);
+}
+
+.general-details .action-card {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-m);
+  padding: var(--space-m);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.general-details .action-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+.general-details .action-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-s);
+}
+
+.general-details .action-card-icon {
+  width: 32px;
+  height: 32px;
+  background-color: rgba(0, 120, 212, 0.1);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-right: var(--space-s);
+}
+
+.general-details .action-card-icon i {
+  font-size: 16px;
+}
+
+.general-details .action-card-title {
+  font-weight: 600;
+  font-size: var(--font-size-medium);
+  margin: 0;
+}
+
+.general-details .action-card-description {
+  color: var(--text-medium);
+  margin-bottom: var(--space-m);
+  line-height: 1.4;
+}
+
+.general-details .action-card-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Notification settings section */
+.general-details .notifications-panel {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-m);
+  padding: var(--space-m);
+  margin-bottom: var(--space-l);
+}
+
+.general-details .notification-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-s) 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.general-details .notification-option:last-child {
+  border-bottom: none;
+}
+
+.general-details .notification-text {
+  font-weight: 500;
+}
+
+.general-details .notification-description {
+  font-size: var(--font-size-small);
+  color: var(--text-medium);
+  margin-top: var(--space-xs);
+}
