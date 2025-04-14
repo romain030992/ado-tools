@@ -1,4 +1,5 @@
 import Component from '../base/component.js';
+import ToastManager from '../base/toast-manager.js';
 
 /**
  * Classe de base pour les composants de détails des fonctionnalités
@@ -15,7 +16,6 @@ export default class FeatureDetailsBase extends Component {
     this.featureKey = ''; // Doit être défini par les classes enfants
     this.originalValues = {};
   }
-
   /**
    * Rend le composant dans le conteneur
    */
@@ -30,8 +30,8 @@ export default class FeatureDetailsBase extends Component {
     this.renderBody(body);
     this.container.appendChild(body);
     
-    // Pied du composant
-    this.renderFooter();
+    // Note: Nous ne rendons plus le pied de page avec les boutons
+    // car nous utilisons l'autosave
     
     // Sauvegarder les valeurs originales pour la comparaison
     this.updateOriginalValues();
@@ -122,7 +122,6 @@ export default class FeatureDetailsBase extends Component {
     // À implémenter par les classes enfants
     return {};
   }
-
   /**
    * Sauvegarde les modifications
    */
@@ -136,6 +135,19 @@ export default class FeatureDetailsBase extends Component {
       // Mettre à jour les valeurs originales après sauvegarde
       this.updateOriginalValues();
     }
+  }
+  
+  /**
+   * Sauvegarde les modifications avec debounce pour éviter les appels trop fréquents
+   * @param {string} [id='default'] - Identifiant unique pour distinguer différents composants
+   */
+  debouncedSaveChanges(id = 'default') {
+    // Utiliser un identifiant basé sur la clé de fonctionnalité si non spécifié
+    const debounceId = id === 'default' ? `${this.featureKey}-save` : id;
+    
+    ToastManager.debounce(() => {
+      this.saveChanges();
+    }, 800, debounceId);
   }
 
   /**

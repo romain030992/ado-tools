@@ -1,311 +1,200 @@
 /* Styles for Task Drift Details component */
-
 .task-drift-details .feature-enable-switch {
-  border-left: 4px solid #ff9800;
-}
-
-/* Color configuration section */
-.task-drift-details .color-config-section {
-  margin-bottom: var(--space-l);
-}
-
-.task-drift-details .color-config-panel {
-  background-color: white;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-m);
-  padding: var(--space-m);
-}
-
-.task-drift-details .color-group {
-  margin-bottom: var(--space-l);
-}
-
-.task-drift-details .color-group-title {
-  font-weight: 600;
-  margin-bottom: var(--space-s);
-  font-size: var(--font-size-medium);
-}
-
-.task-drift-details .color-group-description {
-  color: var(--text-medium);
-  margin-bottom: var(--space-m);
-}
-
-.task-drift-details .color-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: var(--space-m);
-}
-
-.task-drift-details .color-label {
-  width: 100px;
-  font-weight: 500;
-  margin-right: var(--space-m);
-}
-
-.task-drift-details .color-preview {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--border-radius-s);
-  margin-right: var(--space-m);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.task-drift-details .color-picker-container {
-  position: relative;
-}
-
-.task-drift-details .color-value-text {
-  display: inline-block;
-  padding: var(--space-xs) var(--space-s);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-s);
-  font-family: 'Consolas', monospace;
-  margin-left: var(--space-s);
-  font-size: var(--font-size-small);
-  color: var(--text-medium);
-}
-
-/* Threshold settings */
-.task-drift-details .threshold-section {
-  margin-bottom: var(--space-l);
-}
-
-.task-drift-details .threshold-panel {
-  background-color: white;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-m);
-  padding: var(--space-m);
-}
-
-.task-drift-details .threshold-description {
-  margin-bottom: var(--space-m);
-  color: var(--text-medium);
-}
-
-.task-drift-details .slider-container {
-  margin: var(--space-m) 0;
-}
-
-.task-drift-details .slider-with-labels {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-bottom: var(--space-m);
-}
-
-.task-drift-details .slider-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--space-xs);
-}
-
-.task-drift-details .slider-title {
-  font-weight: 500;
-}
-
-.task-drift-details .slider-value {
-  font-weight: 500;
-  color: var(--primary-color);
-}
-
-.task-drift-details input[type="range"] {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 6px;
-  border-radius: 5px;
-  background: #ddd;
-  outline: none;
-}
-
-.task-drift-details input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--primary-color);
-  cursor: pointer;
-  border: 2px solid white;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-}
-
-.task-drift-details input[type="range"]::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--primary-color);
-  cursor: pointer;
-  border: 2px solid white;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-}
-
-.task-drift-details .slider-labels {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 4px;
-}
-
-.task-drift-details .slider-label {
-  font-size: var(--font-size-small);
-  color: var(--text-medium);
-}
-
-/* Preview section */
-.task-drift-details .preview-section {
-  margin-bottom: var(--space-l);
-}
-
-.task-drift-details .preview-card {
-  background-color: white;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-m);
-  padding: var(--space-m);
-}
-
-.task-drift-details .preview-title {
-  font-weight: 600;
-  margin-bottom: var(--space-m);
-}
-
-.task-drift-details .preview-description {
-  color: var(--text-medium);
-  margin-bottom: var(--space-m);
-}
-
-.task-drift-details .preview-samples {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-m);
-  margin-bottom: var(--space-m);
-}
-
-.task-drift-details .preview-sample {
-  flex-basis: calc(50% - var(--space-m));
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-s);
-  padding: var(--space-s);
-  position: relative;
-}
-
-.task-drift-details .sample-title {
-  font-weight: 500;
-  margin-bottom: var(--space-s);
-  font-size: var(--font-size-small);
-}
-
-.task-drift-details .sample-content {
-  display: flex;
-  align-items: center;
-}
-
-/* Task preview samples */
-.task-drift-details .task-preview {
-  background-color: #f9f9f9;
-  padding: var(--space-s);
-  border-radius: var(--border-radius-s);
-  width: 100%;
-}
-
-.task-drift-details .task-title {
-  font-weight: 500;
-  margin-bottom: var(--space-xs);
-}
-
-.task-drift-details .task-meta {
-  display: flex;
-  justify-content: space-between;
-  font-size: var(--font-size-small);
-  color: var(--text-medium);
-}
-
-.task-drift-details .drift-indicator {
-  position: absolute;
-  top: var(--space-s);
-  right: var(--space-s);
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
-.task-drift-details .drift-low {
-  background-color: #ffeb3b;
-}
-
-.task-drift-details .drift-medium {
-  background-color: #ff9800;
-}
-
-.task-drift-details .drift-high {
-  background-color: #f44336;
-}
-
-.task-drift-details .drift-extreme {
-  background-color: #9c27b0;
-}
-
-/* Advanced options section */
-.task-drift-details .options-section {
-  margin-bottom: var(--space-l);
-}
-
-.task-drift-details .options-panel {
-  background-color: white;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-m);
-  padding: var(--space-m);
-}
-
-.task-drift-details .option-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--space-s) 0;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.task-drift-details .option-item:last-child {
-  border-bottom: none;
-}
-
-.task-drift-details .option-description {
-  display: flex;
-  flex-direction: column;
-}
-
-.task-drift-details .option-title {
-  font-weight: 500;
-  margin-bottom: var(--space-xs);
-}
-
-.task-drift-details .option-detail {
-  font-size: var(--font-size-small);
-  color: var(--text-medium);
-}
-
-/* Reset section */
-.task-drift-details .reset-section {
-  margin-top: var(--space-l);
-}
-
-.task-drift-details .danger-zone {
-  background-color: rgba(244, 67, 54, 0.05);
-  border: 1px solid rgba(244, 67, 54, 0.2);
-  border-radius: var(--border-radius-m);
-  padding: var(--space-m);
-}
-
-.task-drift-details .danger-zone-title {
-  color: #d32f2f;
-  font-weight: 600;
-  margin-bottom: var(--space-s);
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-}
-
-.task-drift-details .danger-zone-description {
-  color: var(--text-medium);
-  margin-bottom: var(--space-m);
-}
+    border-left: 4px solid #ff9800;
+  }
+  
+  /* Shared styles */
+  .task-drift-details .section {
+    margin-bottom: 24px;
+  }
+  
+  .task-drift-details .section-title {
+    font-weight: 600;
+    margin-bottom: 12px;
+    font-size: 16px;
+  }
+  
+  .task-drift-details .section-description {
+    color: #666;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+  
+  .task-drift-details .panel {
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  
+  /* Slider configuration */
+  .task-drift-details .slider-container {
+    width: 100%;
+    margin: 24px 0;
+    position: relative;
+  }
+  
+  .task-drift-details .color-gradient {
+    height: 30px;
+    border-radius: 15px;
+    margin: 10px 0 25px 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  }
+  
+  .task-drift-details .threshold-slider {
+    width: 100%;
+    margin: 16px 0;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: #ddd;
+    outline: none;
+  }
+  
+  .task-drift-details .threshold-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #333;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  }
+  
+  .task-drift-details .threshold-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #333;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  }
+  
+  .task-drift-details .threshold-marker {
+    position: absolute;
+    width: 2px;
+    height: 38px;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 10;
+    margin-left: -1px;
+    top: -4px;
+  }
+  
+  .task-drift-details .threshold-value {
+    position: absolute;
+    font-size: 12px;
+    font-weight: bold;
+    top: -24px;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+  
+  .task-drift-details .threshold-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+  
+  .task-drift-details .threshold-label {
+    font-size: 12px;
+    color: #666;
+  }
+  
+  /* Threshold configuration */
+  .task-drift-details .threshold-config {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 12px;
+  }
+  
+  .task-drift-details .threshold-config-label {
+    width: 200px;
+    font-weight: 500;
+  }
+  
+  .task-drift-details .threshold-config-value {
+    width: 80px;
+  }
+  
+  .task-drift-details .threshold-config-color {
+    width: 40px;
+    height: 40px;
+  }
+  
+  /* Examples section */
+  .task-drift-details .examples-section {
+    margin-top: 30px;
+  }
+  
+  .task-drift-details .examples-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .task-drift-details .examples-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 15px;
+  }
+  
+  .task-drift-details .example-card {
+    flex: 0 0 calc(50% - 10px);
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .task-drift-details .example-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .task-drift-details .example-name {
+    font-weight: bold;
+    font-size: 15px;
+  }
+  
+  .task-drift-details .example-indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 8px;
+  }
+  
+  .task-drift-details .example-details {
+    display: flex;
+    font-size: 13px;
+    gap: 12px;
+  }
+  
+  .task-drift-details .example-metric {
+    display: flex;
+    align-items: center;
+  }
+  
+  .task-drift-details .example-label {
+    font-weight: 500;
+    margin-right: 5px;
+    color: #666;
+  }
+  
+  .task-drift-details .no-estimate-config {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #e0e0e0;
+  }
+  

@@ -83,13 +83,12 @@ export default class QuickFilterDetails extends FeatureDetailsBase {
     persons.forEach(person => {
       this.addPersonItem(person);
     });
-    
-    // Bouton pour ajouter une personne
+      // Bouton pour ajouter une personne
     const addPersonButton = this.createElement('button', {
       id: 'addPersonButton',
       className: 'add-button'
     }, {
-      click: () => this.addPersonItem()
+      click: () => this.addPersonItem('', true) // Activer la sauvegarde automatique
     });
     
     const addIcon = this.createElement('i', { className: 'fas fa-plus' });
@@ -98,12 +97,12 @@ export default class QuickFilterDetails extends FeatureDetailsBase {
     
     container.appendChild(addPersonButton);
   }
-
   /**
    * Ajoute un élément de personne à la liste
    * @param {string} [name=''] - Nom de la personne
+   * @param {boolean} [autoSave=false] - Si vrai, déclenche la sauvegarde automatiquement
    */
-  addPersonItem(name = '') {
+  addPersonItem(name = '', autoSave = false) {
     const personList = this.elements.personList;
     
     const personItem = this.createElement('div', { className: 'person-item' });
@@ -113,6 +112,11 @@ export default class QuickFilterDetails extends FeatureDetailsBase {
       type: 'text',
       value: name,
       placeholder: 'Nom de la personne'
+    }, {
+      // Déclencher la sauvegarde automatique lors de la modification
+      input: () => this.debouncedSaveChanges(),
+      change: () => this.debouncedSaveChanges(),
+      blur: () => this.debouncedSaveChanges()
     });
     personItem.appendChild(nameInput);
     
@@ -120,7 +124,10 @@ export default class QuickFilterDetails extends FeatureDetailsBase {
     const removeButton = this.createElement('button', {
       className: 'remove-button'
     }, {
-      click: () => personItem.remove()
+      click: () => {
+        personItem.remove();
+        this.debouncedSaveChanges(); // Sauvegarde après suppression
+      }
     });
     
     const removeIcon = this.createElement('i', { className: 'fas fa-trash-alt' });
@@ -128,6 +135,11 @@ export default class QuickFilterDetails extends FeatureDetailsBase {
     personItem.appendChild(removeButton);
     
     personList.appendChild(personItem);
+    
+    // Sauvegarder automatiquement si demandé
+    if (autoSave) {
+      this.debouncedSaveChanges();
+    }
   }
 
   /**

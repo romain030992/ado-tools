@@ -48,8 +48,7 @@ export default class GeneralDetails extends FeatureDetailsBase {
       project: projectInput.value
     };
   }
-  
-  /**
+    /**
    * Rend le corps du composant
    * @param {HTMLElement} container - Conteneur pour le corps
    */
@@ -58,7 +57,11 @@ export default class GeneralDetails extends FeatureDetailsBase {
     const orgaField = this.createTextField(
       'orgaInput',
       this.props.config?.general?.orga || '',
-      null,
+      {
+        input: () => this.debouncedSaveChanges(),
+        change: () => this.debouncedSaveChanges(),
+        blur: () => this.debouncedSaveChanges()
+      },
       'Organisation',
       'Nom de l\'organisation',
       'Le nom de votre organisation Azure DevOps'
@@ -70,7 +73,11 @@ export default class GeneralDetails extends FeatureDetailsBase {
     const projectField = this.createTextField(
       'projectInput',
       this.props.config?.general?.project || '',
-      null,
+      {
+        input: () => this.debouncedSaveChanges(),
+        change: () => this.debouncedSaveChanges(),
+        blur: () => this.debouncedSaveChanges()
+      },
       'Projet',
       'Nom du projet',
       'Le nom de votre projet Azure DevOps'

@@ -1,4 +1,5 @@
 import FeatureDetailsBase from './feature-details-base.js';
+import ToastManager from '../base/toast-manager.js';
 
 /**
  * Composant pour l'édition des paramètres d'agrégation par statut
@@ -104,23 +105,30 @@ export default class StatusAggregationDetails extends FeatureDetailsBase {
     statuses.forEach(status => {
       this.addStatusItem(status.name, status.color);
     });
-    
-    // Bouton pour ajouter un statut
+      // Bouton pour ajouter un statut
     const addStatusButton = this.createElement('button', {
       id: 'addStatusButton',
       className: 'add-button'
     }, {
-      click: () => this.addStatusItem()
+      click: () => this.addStatusItem('', '#000000', true) // Activer la sauvegarde automatique
     }, 'Ajouter un statut');
     container.appendChild(addStatusButton);
-  }
-
-  /**
+  }  /**
    * Ajoute un élément de statut à la liste
    * @param {string} [name=''] - Nom du statut
    * @param {string} [color='#000000'] - Couleur du statut
+   * @param {boolean} [autoSave=false] - Si vrai, déclenche la sauvegarde automatiquement
+   */  /**
+   * Sauvegarde les modifications avec debounce pour éviter les appels trop fréquents
    */
-  addStatusItem(name = '', color = '#000000') {
+  debouncedSaveChanges() {
+    // Utiliser un identifiant unique pour ce composant
+    ToastManager.debounce(() => {
+      this.saveChanges();
+    }, 800, 'status-aggregation-save');
+  }
+  
+  addStatusItem(name = '', color = '#000000', autoSave = false) {
     const statusList = this.elements.statusList;
     
     const statusItem = this.createElement('div', { className: 'status-item' });
@@ -130,6 +138,10 @@ export default class StatusAggregationDetails extends FeatureDetailsBase {
       type: 'text',
       value: name,
       placeholder: 'Nom du statut'
+    }, {
+      // Déclencher la sauvegarde à la fin de la modification du nom, avec debounce
+      input: () => this.debouncedSaveChanges(),
+      blur: () => this.debouncedSaveChanges()
     });
     statusItem.appendChild(nameInput);
     
@@ -137,6 +149,10 @@ export default class StatusAggregationDetails extends FeatureDetailsBase {
     const colorInput = this.createElement('input', {
       type: 'color',
       value: color
+    }, {
+      // Déclencher la sauvegarde lors du changement de couleur, avec debounce
+      input: () => this.debouncedSaveChanges(),
+      change: () => this.debouncedSaveChanges()
     });
     statusItem.appendChild(colorInput);
     
@@ -144,7 +160,11 @@ export default class StatusAggregationDetails extends FeatureDetailsBase {
     const removeButton = this.createElement('button', {
       className: 'remove-button'
     }, {
-      click: () => statusItem.remove()
+      click: () => {
+        statusItem.remove();
+        // Pas de debounce pour la suppression, car c'est une action unique
+        this.saveChanges();
+      }
     });
     
     const removeIcon = this.createElement('i', { className: 'fas fa-trash-alt' });
@@ -152,6 +172,11 @@ export default class StatusAggregationDetails extends FeatureDetailsBase {
     statusItem.appendChild(removeButton);
     
     statusList.appendChild(statusItem);
+    
+    // Sauvegarder automatiquement si demandé, sans debounce car c'est une action unique
+    if (autoSave) {
+      this.saveChanges();
+    }
   }
 
   /**

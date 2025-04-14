@@ -6,6 +6,7 @@ import TaskDriftDetails from './components/feature-details/task-drift-details.js
 import QuickFilterDetails from './components/feature-details/quick-filter-details.js';
 import BetterWikiDetails from './components/feature-details/better-wiki-details.js';
 import StorageService from './services/storage-service.js';
+import ToastManager from './components/base/toast-manager.js';
 
 document.addEventListener('DOMContentLoaded', async function() {
   // Conteneurs principaux
@@ -135,15 +136,13 @@ document.addEventListener('DOMContentLoaded', async function() {
       await StorageService.updateConfiguration(index, updatedConfig);
       currentConfig = updatedConfig;
     }
-  }
-  
-  // Gestionnaire de sauvegarde de configuration
+  }    // Gestionnaire de sauvegarde de configuration
   async function handleSaveConfig(configData) {
     if (!currentConfig) return;
     
-    // Récupérer l'index de la configuration actuelle
+    // Récupérer l'index de la configuration actuelle en utilisant l'identifiant unique
     const index = await StorageService.getConfigurations().then(configs => {
-      return configs.findIndex(c => c === currentConfig);
+      return configs.findIndex(c => c.general && c.general.projectUrl === currentConfig.general?.projectUrl);
     });
     
     if (index !== -1) {
@@ -185,8 +184,8 @@ document.addEventListener('DOMContentLoaded', async function() {
       await StorageService.updateConfiguration(index, updatedConfig);
       currentConfig = updatedConfig;
       
-      // Afficher un message de succès
-      alert('Configuration sauvegardée avec succès !');
+      // Afficher un toast de succès
+      ToastManager.showToast('Configuration sauvegardée avec succès !', 'success');
     }
   }
   

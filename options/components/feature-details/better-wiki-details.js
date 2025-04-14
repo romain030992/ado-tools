@@ -69,8 +69,7 @@ export default class BetterWikiDetails extends FeatureDetailsBase {
     
     // Identité du template (emoji + titre)
     const templateIdentity = this.createElement('div', { className: 'template-identity' });
-    
-    // Picker d'emoji
+      // Picker d'emoji
     const emojiPicker = this.createElement('div', { className: 'emoji-picker' });
     const emojiDisplay = this.createElement('span', { className: 'emoji-display' }, {}, '😀');
     emojiPicker.appendChild(emojiDisplay);
@@ -83,6 +82,7 @@ export default class BetterWikiDetails extends FeatureDetailsBase {
     }, {
       input: (e) => {
         emojiDisplay.textContent = e.target.value || '😀';
+        this.debouncedSaveChanges(); // Ajout de l'autosave
       }
     });
     this.storeElement('templateEmoji', templateEmoji);
@@ -97,6 +97,10 @@ export default class BetterWikiDetails extends FeatureDetailsBase {
       className: 'template-title-input',
       placeholder: 'Nouveau template',
       value: ''
+    }, {
+      input: () => this.debouncedSaveChanges(),
+      change: () => this.debouncedSaveChanges(),
+      blur: () => this.debouncedSaveChanges()
     });
     this.storeElement('templateTitle', templateTitle);
     templateIdentity.appendChild(templateTitle);
@@ -165,8 +169,7 @@ export default class BetterWikiDetails extends FeatureDetailsBase {
     
     // Conteneur de contenu du template (éditeur + aperçu)
     const templateContentContainer = this.createElement('div', { className: 'template-content-container' });
-    
-    // Éditeur de contenu
+      // Éditeur de contenu
     const templateContent = this.createElement('textarea', {
       id: 'templateContent',
       placeholder: 'Contenu du Template'
@@ -175,6 +178,7 @@ export default class BetterWikiDetails extends FeatureDetailsBase {
         if (this.isPreviewMode) {
           this.updatePreview(e.target.value);
         }
+        this.debouncedSaveChanges('template-content'); // Ajout de l'autosave
       }
     });
     this.storeElement('templateContent', templateContent);
@@ -370,22 +374,12 @@ export default class BetterWikiDetails extends FeatureDetailsBase {
       ...config,
       templates
     };
-    
-    // Sauvegarder via le callback
+      // Sauvegarder via le callback
     if (typeof this.props.onSave === 'function') {
       this.props.onSave(updatedConfig);
       
-      // Actualiser la liste des templates après sauvegarde
-      if (this.props.optionalContainer) {
-        this.renderTemplateList(this.props.optionalContainer);
-        
-        // Réactiver la sélection après le rendu
-        const templateList = this.elements.templateList;
-        const items = templateList.querySelectorAll('.template-list-item');
-        if (items[this.editingTemplateIndex]) {
-          items[this.editingTemplateIndex].classList.add('selected');
-        }
-      }
+      // Actualiser la liste des templates et conserver la sélection
+      this.refreshTemplateList(this.editingTemplateIndex);
     }
   }
   
@@ -414,17 +408,15 @@ export default class BetterWikiDetails extends FeatureDetailsBase {
         ...config,
         templates
       };
-      
-      // Sauvegarder via le callback
+        // Sauvegarder via le callback
       if (typeof this.props.onSave === 'function') {
         this.props.onSave(updatedConfig);
         
-        // Réinitialiser l'éditeur et actualiser la liste
+        // Réinitialiser l'éditeur
         this.resetTemplateEditor();
         
-        if (this.props.optionalContainer) {
-          this.renderTemplateList(this.props.optionalContainer);
-        }
+        // Actualiser la liste des templates
+        this.refreshTemplateList();
       }
     }
   }
@@ -500,6 +492,33 @@ export default class BetterWikiDetails extends FeatureDetailsBase {
       }
     } else {
       previewContent.innerHTML = '<em>Pas de contenu à afficher</em>';
+    }
+  }
+  
+  /**
+   * Rafraîchit la liste des templates tout en conservant la sélection actuelle
+   * @param {number} [selectedIndex=null] - Index du template à sélectionner après le rafraîchissement
+   */
+  refreshTemplateList(selectedIndex = null) {
+    // Vérifier si le conteneur optionnel est présent
+    if (!this.props.optionalContainer) {
+      return;
+    }
+
+    // Sauvegarder l'index à sélectionner (utiliser l'index actuel si non spécifié)
+    const indexToSelect = selectedIndex !== null ? selectedIndex : this.editingTemplateIndex;
+    
+    // Rafraîchir la liste des templates
+    this.renderTemplateList(this.props.optionalContainer);
+    
+    // Restaurer la sélection après le rendu si un index est spécifié
+    if (indexToSelect !== null) {
+      const templateList = this.elements.templateList;
+      const items = templateList.querySelectorAll('.template-list-item');
+      
+      if (items[indexToSelect]) {
+        items[indexToSelect].classList.add('selected');
+      }
     }
   }
   
