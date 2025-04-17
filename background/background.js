@@ -12,7 +12,7 @@ async function injectScriptsLoader(tabId, scriptPaths, config) {
   // Injecter d'abord le CSS commun
   await chrome.scripting.insertCSS({
     target: { tabId: tabId },
-    files: ['injected-content.css']
+    files: ['injected-content.css', 'features/quick-filter/feature.css']
   });
 
   // Liste des fichiers de base toujours nécessaires

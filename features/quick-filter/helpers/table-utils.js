@@ -52,9 +52,6 @@ const TableUtils = {
    * @returns {MutationObserver} - L'observateur créé pour détecter les nouvelles lignes
    */
   collectAllTableRows(originalTable, onComplete) {
-    // Nombre total de lignes attendu (si disponible)
-    const totalRowCount = parseInt(originalTable.getAttribute('aria-rowcount') || '0');
-    console.log(`Nombre total de lignes attendu : ${totalRowCount}`);
     const tbody = originalTable.querySelector('tbody');
     
     if (!tbody) {
@@ -89,14 +86,15 @@ const TableUtils = {
       });
       
       console.log(`${copiedRows.length} lignes collectées`);
-    };      // Fonction pour faire défiler et collecter
+    };      
+    
+    // Fonction pour faire défiler et collecter
     const scrollAndCollect = () => {      
       // Collecter les lignes actuellement visibles
       collectCurrentRows();
       
       // Vérifier si le nombre de lignes a changé depuis la dernière itération
       console.log(`Nombre total de lignes collectées: ${collectedRowIds.size} (précédemment: ${previousRowCount})`);
-      
       if (collectedRowIds.size === previousRowCount) {
         unchangedIterations++;
         console.log(`Aucune nouvelle ligne détectée (${unchangedIterations}/${MAX_UNCHANGED_ITERATIONS})`);
@@ -117,7 +115,7 @@ const TableUtils = {
       const visibleRows = Array.from(tbody.querySelectorAll('tr'));
       console.log(`Nombre de lignes visibles : ${visibleRows.length}`);
       if (visibleRows.length > 10) {
-        const targetIndex = Math.max(0, Math.min(visibleRows.length - 1, Math.floor(visibleRows.length * 0.75)));
+        const targetIndex = Math.max(0, Math.min(visibleRows.length - 1, Math.floor(visibleRows.length * 0.9)));
         console.log(`Défilement forcé vers la ligne ${targetIndex}/${visibleRows.length}`);
         
         try {

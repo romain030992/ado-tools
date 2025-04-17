@@ -28,6 +28,7 @@ class QuickFilter extends FeatureBase {
     this.originalTable = null;
     this.filterableTable = null;
     this.observer = null;
+    this.loaderContainer = null; // Élément conteneur du loader
   }
 
   /**
@@ -268,7 +269,6 @@ class QuickFilter extends FeatureBase {
     this.displayOriginalTable();
     this.updateNavigationButtons();
   }
-
   /**
    * Affiche le tableau filtrable
    */
@@ -285,6 +285,9 @@ class QuickFilter extends FeatureBase {
       this.selectUser(0);
       return;
     }
+    
+    // Afficher le loader avant de commencer le traitement
+    this.showLoader();
     
     // Sinon, cliquer sur "Expand All" pour développer toutes les lignes
     console.log("Expansion du tableau...");
@@ -303,12 +306,16 @@ class QuickFilter extends FeatureBase {
             this.copiedRows
           );
           
+          // Masquer le loader une fois le tableau créé
+          this.hideLoader();
+          
           // Sélectionner le premier utilisateur pour filtrer le tableau
           this.selectUser(0);
         });
       }, 500); // Délai pour permettre au DOM de se mettre à jour après l'expansion
     } else {
       console.warn("Bouton d'expansion non trouvé");
+      this.hideLoader(); // Masquer le loader en cas d'erreur
     }
   }
 
@@ -382,6 +389,56 @@ class QuickFilter extends FeatureBase {
       this.selectedUserElement.textContent = this.users[this.selectedUserIndex];
       this.filterSelectedUser();
       this.updateNavigationButtons();
+    }
+  }
+
+  /**
+   * Crée l'élément de loader
+   */
+  createLoaderElement() {
+    // Vérifier si le loader existe déjà
+    if (this.loaderContainer) return;
+    
+    // Créer le conteneur du loader
+    this.loaderContainer = DOMUtils.createElement('div', {
+      className: 'quick-filter-loader-container',
+      id: 'quick-filter-loader'
+    });
+    
+    // Créer le spinner
+    const loader = DOMUtils.createElement('div', {
+      className: 'quick-filter-loader'
+    });
+    
+    // Ajouter le spinner au conteneur
+    this.loaderContainer.appendChild(loader);
+    
+    // Trouver l'élément backlogs-view pour positionner le loader
+    const backlogsView = document.querySelector('.backlogs-view');
+    if (backlogsView) {
+      backlogsView.appendChild(this.loaderContainer);
+    } else {
+      // Si .backlogs-view n'est pas trouvé, ajouter au body
+      document.body.appendChild(this.loaderContainer);
+    }
+  }
+
+  /**
+   * Affiche le loader
+   */
+  showLoader() {
+    if (!this.loaderContainer) {
+      this.createLoaderElement();
+    }
+    this.loaderContainer.style.display = 'flex';
+  }
+
+  /**
+   * Masque le loader
+   */
+  hideLoader() {
+    if (this.loaderContainer) {
+      this.loaderContainer.style.display = 'none';
     }
   }
 }
