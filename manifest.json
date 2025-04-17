@@ -12,29 +12,29 @@
       "service_worker": "background/background.js",
       "type": "module"
     },
-    "action": {
-      "default_popup": "popup/popup.html",
+  "action": {
+      "default_popup": "settings/popup/popup.html",
       "default_icon": {
         "16": "icon.png",
         "48": "icon.png",
         "128": "icon.png"
       }
     },
-    "options_page": "options/options.html",
-    "web_accessible_resources": [
+    "options_page": "settings/options/options.html",    "web_accessible_resources": [
         {
             "resources": [
-                "libs/marked.min.js",
-                "libs/purify.min.js",
-                "features/core/*.js",
-                "features/better-wiki/*.js",
-                "features/better-wiki/helpers/*.js",
-                "features/quick-filter/*.js",
-                "features/quick-filter/helpers/*.js",
-                "features/status-aggregation/*.js",
-                "features/status-aggregation/helpers/*.js",
-                "features/task-drift/*.js",
-                "features/task-drift/helpers/*.js",
+                "injection/libs/marked.min.js",
+                "injection/libs/purify.min.js",
+                "injection/features/core/*.js",
+                "injection/features/better-wiki/*.js",
+                "injection/features/better-wiki/helpers/*.js",
+                "injection/features/quick-filter/*.js",
+                "injection/features/quick-filter/helpers/*.js",
+                "injection/features/status-aggregation/*.js",
+                "injection/features/status-aggregation/helpers/*.js",
+                "injection/features/task-drift/*.js",
+                "injection/features/task-drift/helpers/*.js",
+                "injection/styles/*.css",
                 "assets/fontawesome.min.css",
                 "assets/fonts/*"
             ],

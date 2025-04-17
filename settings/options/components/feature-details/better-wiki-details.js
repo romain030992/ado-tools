@@ -1,5 +1,5 @@
 import FeatureDetailsBase from './feature-details-base.js';
-import StorageService from '../../services/storage-service.js';
+import StorageService from '../../../services/storage-service.js';
 
 /**
  * Composant pour l'édition des paramètres d'amélioration du Wiki

@@ -20,17 +20,22 @@ The extension uses a modular architecture to facilitate maintenance and code evo
 ```
 ado-tools/
 ├── background/          # Background scripts for the extension
-├── popup/               # Extension popup interface
-│   └── components/      # Reusable components for the popup
-├── options/             # Complete configuration page
-│   └── components/      # Reusable components for options
-├── features/            # Features injected into Azure DevOps pages
-│   ├── core/            # Modules shared by all features
-│   ├── status-aggregation/  # Status aggregation feature
-│   ├── task-drift/      # Task drift feature
-│   ├── quick-filter/    # Quick filter feature
-│   └── better-wiki/     # Wiki enhancement feature
-└── libs/                # External libraries
+├── assets/              # Shared assets (icons, fonts, etc.)
+├── injection/           # Code injected into web pages
+│   ├── features/        # Features injected into Azure DevOps pages
+│   │   ├── core/        # Modules shared by all features
+│   │   ├── status-aggregation/  # Status aggregation feature
+│   │   ├── task-drift/  # Task drift feature
+│   │   ├── quick-filter/ # Quick filter feature
+│   │   └── better-wiki/ # Wiki enhancement feature
+│   ├── styles/          # CSS for injected features
+│   └── libs/            # External libraries used by injection code
+└── settings/            # Extension configuration code
+    ├── options/         # Complete configuration page
+    │   └── components/  # Reusable components for options
+    ├── popup/           # Extension popup interface
+    │   └── components/  # Reusable components for the popup
+    └── services/        # Shared services for settings
 ```
 
 ### Code Organization
@@ -43,12 +48,12 @@ Each feature follows the same structure:
 
 ### How to add a new feature
 
-1. Create a new folder in `features/` with your feature name
+1. Create a new folder in `injection/features/` with your feature name
 2. Create an `index.js` file that extends the `FeatureBase` class
 3. Implement the `initFeature()` method with specific logic
 4. Add the necessary helpers and components in appropriate subfolders
 5. Update `background.js` to include the new feature
-6. Add configuration options in `options.js`
+6. Add configuration options in `settings/options/options.js`
 
 Example structure for a new feature:
 

@@ -5,7 +5,7 @@ import StatusAggregationDetails from './components/feature-details/status-aggreg
 import TaskDriftDetails from './components/feature-details/task-drift-details.js';
 import QuickFilterDetails from './components/feature-details/quick-filter-details.js';
 import BetterWikiDetails from './components/feature-details/better-wiki-details.js';
-import StorageService from './services/storage-service.js';
+import StorageService from '../services/storage-service.js';
 import ToastManager from './components/base/toast-manager.js';
 
 document.addEventListener('DOMContentLoaded', async function() {

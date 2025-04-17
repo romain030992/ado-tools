@@ -1,5 +1,5 @@
 import Component from '../base/component.js';
-import StorageService from '../../services/storage-service.js';
+import StorageService from '../../../services/storage-service.js';
 
 /**
  * Composant pour la gestion de la liste des configurations

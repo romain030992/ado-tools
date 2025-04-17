@@ -8,18 +8,16 @@
  * @param {Array<string>} scriptPaths - Chemins des scripts à charger
  * @param {Object} config - Configuration à transmettre aux scripts
  */
-async function injectScriptsLoader(tabId, scriptPaths, config) {
-  // Injecter d'abord le CSS commun
+async function injectScriptsLoader(tabId, scriptPaths, config) {  // Injecter d'abord le CSS commun
   await chrome.scripting.insertCSS({
     target: { tabId: tabId },
-    files: ['injected-content.css', 'features/quick-filter/feature.css']
+    files: ['injection/styles/injected-content.css', 'injection/styles/quick-filter.css']
   });
-
   // Liste des fichiers de base toujours nécessaires
   const coreScripts = [
-    'features/core/config-loader.js',
-    'features/core/dom-utils.js',
-    'features/core/feature-base.js'
+    'injection/features/core/config-loader.js',
+    'injection/features/core/dom-utils.js',
+    'injection/features/core/feature-base.js'
   ];
   
   // Combiner les scripts de base avec les scripts spécifiques
@@ -124,26 +122,24 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
       }
 
       // Liste des modules à injecter en fonction du type de page et des fonctionnalités activées
-      const moduleScripts = [];
-
-      // Pour les pages de backlog
+      const moduleScripts = [];      // Pour les pages de backlog
       if (pageType === 'backlog') {
         if (currentOrgaProject.statusAggregation?.enabled) {
-          moduleScripts.push('features/status-aggregation/index.js');
+          moduleScripts.push('injection/features/status-aggregation/index.js');
         }
         
         if (currentOrgaProject.taskDrift?.enabled) {
-          moduleScripts.push('features/task-drift/index.js');
+          moduleScripts.push('injection/features/task-drift/index.js');
         }
         
         if (currentOrgaProject.quickFilter?.enabled) {
-          moduleScripts.push('features/quick-filter/index.js');
+          moduleScripts.push('injection/features/quick-filter/index.js');
         }
       } 
       // Pour les pages wiki en mode édition
       else if (pageType === 'wiki') {
         if (currentOrgaProject.betterWiki?.enabled) {
-          moduleScripts.push('features/better-wiki/index.js');
+          moduleScripts.push('injection/features/better-wiki/index.js');
         }
       }
 
