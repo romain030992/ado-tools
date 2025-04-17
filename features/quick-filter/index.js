@@ -239,10 +239,13 @@ class QuickFilter extends FeatureBase {
    * Démarre la session de filtrage
    */
   startFilterSession() {
+    console.log("Démarrage de la session de filtrage");
+    
     // Masquer le bouton de démarrage et afficher les autres boutons
     this.startFilterSessionButton.style.display = 'none';
     this.stopFilterSessionButton.style.display = '';
     this.previousUserButton.style.display = '';
+    this.selectedUserElement.style.display = '';
     this.nextUserButton.style.display = '';
     
     // Initialiser et afficher le tableau filtrable
@@ -253,10 +256,13 @@ class QuickFilter extends FeatureBase {
    * Arrête la session de filtrage
    */
   stopFilterSession() {
+    console.log("Arrêt de la session de filtrage");
+    
     this.selectedUserIndex = -1;
     this.startFilterSessionButton.style.display = '';
     this.stopFilterSessionButton.style.display = 'none';
     this.previousUserButton.style.display = 'none';
+    this.selectedUserElement.style.display = 'none';
     this.nextUserButton.style.display = 'none';
     
     this.displayOriginalTable();
@@ -267,39 +273,57 @@ class QuickFilter extends FeatureBase {
    * Affiche le tableau filtrable
    */
   displayFilterableTable() {
+    console.log("Préparation de l'affichage du tableau filtrable");
+    
     // Si le tableau filtrable existe déjà, l'afficher simplement
-    if (this.filterableTable) {
-      this.filterableTable.style.display = '';
+    const existingFilterableTable = document.getElementById('filterable-table');
+    if (existingFilterableTable) {
+      console.log("Réutilisation du tableau filtrable existant");
+      existingFilterableTable.style.display = '';
       this.originalTable.style.display = 'none';
+      this.filterableTable = existingFilterableTable;
       this.selectUser(0);
       return;
     }
     
     // Sinon, cliquer sur "Expand All" pour développer toutes les lignes
-    this.expandAllButton.click();
-    
-    // Récupérer toutes les lignes du tableau
-    this.observer = TableUtils.collectAllTableRows(this.originalTable, (copiedRows) => {
-      this.copiedRows = copiedRows;
-      
-      // Créer le tableau filtrable
-      this.filterableTable = TableUtils.createFilterableTable(
-        this.originalTable, 
-        this.copiedRows
-      );
-      
-      // Sélectionner le premier utilisateur pour filtrer le tableau
-      this.selectUser(0);
-    });
+    console.log("Expansion du tableau...");
+    if (this.expandAllButton) {
+      // Attendre que le DOM soit à jour avant de continuer
+      setTimeout(() => {
+        // Récupérer toutes les lignes du tableau
+        console.log("Collecte de toutes les lignes...");
+        TableUtils.collectAllTableRows(this.originalTable, (copiedRows) => {
+          console.log(`${copiedRows.length} lignes collectées, création du tableau filtrable...`);
+          this.copiedRows = copiedRows;
+          
+          // Créer le tableau filtrable
+          this.filterableTable = TableUtils.createFilterableTable(
+            this.originalTable, 
+            this.copiedRows
+          );
+          
+          // Sélectionner le premier utilisateur pour filtrer le tableau
+          this.selectUser(0);
+        });
+      }, 500); // Délai pour permettre au DOM de se mettre à jour après l'expansion
+    } else {
+      console.warn("Bouton d'expansion non trouvé");
+    }
   }
 
   /**
    * Restaure l'affichage du tableau original
    */
   displayOriginalTable() {
+    console.log("Restauration du tableau original");
+    
+    if (this.originalTable) {
+      this.originalTable.style.display = '';
+    }
+    
     if (this.filterableTable) {
       this.filterableTable.style.display = 'none';
-      this.originalTable.style.display = '';
     }
   }
 
@@ -307,10 +331,18 @@ class QuickFilter extends FeatureBase {
    * Filtre le tableau pour n'afficher que les tâches assignées à l'utilisateur sélectionné
    */
   filterSelectedUser() {
-    if (this.selectedUserIndex === -1 || !this.copiedRows) return;
+    if (this.selectedUserIndex === -1 || !this.filterableTable) {
+      console.warn("Impossible de filtrer: aucun utilisateur sélectionné ou tableau filtrable non disponible");
+      return;
+    }
+    
+    console.log(`Filtrage pour l'utilisateur: ${this.users[this.selectedUserIndex]}`);
+    
+    // Utiliser les lignes du tableau filtrable plutôt que this.copiedRows
+    const tableRows = Array.from(this.filterableTable.querySelectorAll('tbody tr'));
     
     TableUtils.filterRowsByAssignedUser(
-      this.copiedRows,
+      tableRows,
       this.assignedToIndex,
       this.users[this.selectedUserIndex]
     );
