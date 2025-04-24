@@ -1,333 +1,132 @@
-/* Styles for Better Wiki Details component */
-
-.better-wiki-details .feature-enable-switch {
-  border-left: 4px solid #9c27b0;
-}
-
-/* Templates section */
-.better-wiki-details .templates-container {
-  margin-top: var(--space-m);
-}
-
-/* Template list styles */
-.better-wiki-details .template-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: var(--space-m);
-  margin-top: var(--space-m);
-}
-
-.better-wiki-details .template-card {
-  background-color: white;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-m);
-  overflow: hidden;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-  height: 100%;
+/* Header de la liste des templates (style cohérent avec config-list et feature-list) */
+.template-list-header {
   display: flex;
-  flex-direction: column;
-  cursor: pointer;
-}
-
-.better-wiki-details .template-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-medium);
-}
-
-.better-wiki-details .template-card-header {
+  justify-content: space-between;
+  align-items: center;
   padding: var(--space-m);
   border-bottom: 1px solid var(--border-color);
-  display: flex;
-  align-items: center;
+  background-color: rgba(0, 0, 0, 0.02);
+  height: 56px;
+  box-sizing: border-box;
 }
 
-.better-wiki-details .template-emoji {
-  font-size: 24px;
-  margin-right: var(--space-s);
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.better-wiki-details .template-title {
-  font-weight: 500;
-  font-size: var(--font-size-medium);
+.template-list-header h2 {
   margin: 0;
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.better-wiki-details .template-card-body {
-  padding: var(--space-m);
-  color: var(--text-medium);
-  font-size: var(--font-size-small);
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-}
-
-.better-wiki-details .template-preview {
-  max-height: 100px;
-  overflow: hidden;
-  position: relative;
-  line-height: 1.4;
-}
-
-.better-wiki-details .template-preview:after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 40px;
-  background: linear-gradient(transparent, white);
-}
-
-.better-wiki-details .template-card-footer {
-  padding: var(--space-m);
-  border-top: 1px solid var(--border-color);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.better-wiki-details .template-badge {
-  font-size: var(--font-size-small);
-  color: var(--text-medium);
-}
-
-/* Add template card */
-.better-wiki-details .add-template-card {
-  border: 1px dashed var(--border-color);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: var(--space-l);
-  background-color: rgba(0, 0, 0, 0.01);
-}
-
-.better-wiki-details .add-template-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background-color: var(--primary-color);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: var(--space-m);
-}
-
-.better-wiki-details .add-template-icon i {
-  font-size: 24px;
-}
-
-.better-wiki-details .add-template-text {
-  font-weight: 500;
-  color: var(--primary-color);
-  margin: 0;
-}
-
-/* Template editor */
-.better-wiki-details .template-editor {
-  background-color: white;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-m);
-  padding: var(--space-m);
-  margin-top: var(--space-m);
-}
-
-.better-wiki-details .template-editor-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--space-m);
-}
-
-.better-wiki-details .template-editor-title {
-  font-size: var(--font-size-large);
-  font-weight: 600;
-  margin: 0;
-}
-
-.better-wiki-details .template-editor-actions {
-  display: flex;
-  gap: var(--space-s);
-}
-
-.better-wiki-details .template-form-group {
-  margin-bottom: var(--space-m);
-}
-
-.better-wiki-details .template-form-group label {
-  display: block;
-  font-weight: 500;
-  margin-bottom: var(--space-xs);
-}
-
-.better-wiki-details .template-content-container {
-  margin-top: var(--space-m);
-}
-
-.better-wiki-details .template-content-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: var(--space-s);
-}
-
-.better-wiki-details .template-content-tabs {
-  display: flex;
-  gap: var(--space-s);
-}
-
-.better-wiki-details .tab-button {
-  padding: var(--space-xs) var(--space-m);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-s);
-  cursor: pointer;
-  background-color: white;
-}
-
-.better-wiki-details .tab-button.active {
-  background-color: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
-}
-
-.better-wiki-details .template-content {
-  width: 100%;
-  min-height: 300px;
-  padding: var(--space-m);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-s);
-  font-family: "Consolas", monospace;
-  resize: vertical;
-  line-height: 1.5;
-}
-
-.better-wiki-details .template-preview-container {
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-s);
-  padding: var(--space-m);
-  min-height: 300px;
-  max-height: 600px;
-  overflow-y: auto;
-  background-color: white;
-}
-
-.better-wiki-details .template-editor-footer {
-  margin-top: var(--space-m);
-  display: flex;
-  justify-content: flex-end;
-  gap: var(--space-s);
-}
-
-/* Template preview styling for markdown */
-.markdown-preview {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  line-height: 1.6;
+  padding: 0;
   color: var(--text-dark);
+  font-size: var(--font-size-medium);
 }
 
-.markdown-preview h1,
-.markdown-preview h2,
-.markdown-preview h3,
-.markdown-preview h4,
-.markdown-preview h5,
-.markdown-preview h6 {
-  margin-top: 24px;
-  margin-bottom: 16px;
-  font-weight: 600;
-  line-height: 1.25;
+.template-list-actions {
+  display: flex;
+  gap: var(--space-xs);
 }
 
-.markdown-preview h1 {
-  font-size: 2em;
-  padding-bottom: 0.3em;
-  border-bottom: 1px solid var(--border-color);
+.small-button {
+  padding: var(--space-xs) var(--space-s);
+  font-size: var(--font-size-small);
 }
 
-.markdown-preview h2 {
-  font-size: 1.5em;
-  padding-bottom: 0.3em;
-  border-bottom: 1px solid var(--border-color);
+/* Styles pour les groupes collapsibles */
+.template-group-container {
+  margin-bottom: var(--space-m);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-s);
+  overflow: hidden;
 }
 
-.markdown-preview h3 {
-  font-size: 1.25em;
+.template-group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-xs) var(--space-s);
+  background-color: rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  user-select: none;
 }
 
-.markdown-preview p {
-  margin-top: 0;
-  margin-bottom: 16px;
+.template-group-header:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
-.markdown-preview code {
-  padding: 0.2em 0.4em;
-  margin: 0;
-  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-  font-size: 85%;
-  background-color: rgba(27, 31, 35, 0.05);
-  border-radius: 3px;
+.group-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
 }
 
-.markdown-preview pre {
-  padding: 16px;
-  overflow: auto;
-  font-size: 85%;
-  line-height: 1.45;
-  background-color: #f6f8fa;
-  border-radius: 3px;
+.group-expand-icon {
+  transition: transform 0.2s ease;
+  width: 16px;
 }
 
-.markdown-preview pre code {
-  padding: 0;
-  margin: 0;
-  font-size: 100%;
-  word-break: normal;
-  white-space: pre;
-  background: transparent;
-  border: 0;
+.collapsed .group-expand-icon {
+  transform: rotate(-90deg);
 }
 
-.markdown-preview table {
-  border-collapse: collapse;
-  width: 100%;
-  margin-bottom: 16px;
+.template-group-content {
+  transition: max-height 0.3s ease, opacity 0.2s ease;
 }
 
-.markdown-preview table th,
-.markdown-preview table td {
-  padding: 6px 13px;
-  border: 1px solid #dfe2e5;
+.collapsed .template-group-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
 }
 
-.markdown-preview table tr {
-  background-color: #fff;
-  border-top: 1px solid #c6cbd1;
+.template-sublist{
+  padding-inline-start: 0;
 }
 
-.markdown-preview table tr:nth-child(2n) {
-  background-color: #f6f8fa;
+.template-count {
+  color: var(--text-light);
+  font-size: 0.8em;
+  margin-left: var(--space-xs);
 }
 
-.markdown-preview blockquote {
-  padding: 0 1em;
-  color: #6a737d;
-  border-left: 0.25em solid #dfe2e5;
-  margin: 0 0 16px 0;
+/* Styles pour le menu contextuel */
+.context-menu {
+  position: fixed;
+  z-index: 1000;
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-s);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  min-width: 150px;
 }
 
-.markdown-preview hr {
-  height: 0.25em;
-  padding: 0;
-  margin: 24px 0;
-  background-color: #e1e4e8;
-  border: 0;
+.context-menu-item {
+  padding: var(--space-xs) var(--space-s);
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.context-menu-item:hover {
+  background-color: rgba(0, 120, 212, 0.05);
+}
+
+.context-menu-item.danger {
+  color: var(--danger-color, #d9534f);
+}
+
+.context-menu-item.danger:hover {
+  background-color: rgba(217, 83, 79, 0.05);
+}
+
+.ellipsis-button {
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.ellipsis-button:hover {
+  opacity: 1;
+}
+
+.group-selector select{
+  margin-bottom: 0;
 }
