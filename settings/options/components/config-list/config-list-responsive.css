@@ -1,0 +1,171 @@
+/* Styles for Responsive Config List component */
+
+/* Header styles */
+.config-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-m);
+  border-bottom: 1px solid var(--border-color);
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.config-list-header h2 {
+  margin: 0;
+  padding: 0;
+  color: var(--text-dark);
+  font-size: var(--font-size-medium);
+}
+
+.add-config-button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-s);
+  font-size: var(--font-size-small);
+}
+
+.config-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Item styles */
+.config-list-item {
+  display: flex;
+  align-items: center; /* Centrage vertical */
+  height: 50px; /* Hauteur fixe */
+  padding: 0 var(--space-m);
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.config-list-item:last-child {
+  border-bottom: none;
+}
+
+.config-list-item:hover {
+  background-color: rgba(0, 120, 212, 0.05);
+}
+
+.config-list-item.selected {
+  background-color: rgba(0, 120, 212, 0.1);
+  border-left: 3px solid var(--primary-color);
+}
+
+.config-list-item:hover::after {
+  opacity: 1;
+  color: var(--primary-color);
+}
+
+/* Nom de la configuration */
+.config-name {
+  font-weight: 500;
+  font-size: var(--font-size-base);
+  color: var(--text-dark);
+  flex: 1; /* Prend tout l'espace disponible */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left; /* Alignement à gauche */
+}
+
+/* Config description */
+.config-description {
+  color: var(--text-medium);
+  font-size: var(--font-size-small);
+  padding-left: calc(18px + var(--space-m)); /* Aligner avec l'icône */
+  /* Text overflow handling */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Action bar for adding new configurations */
+.action-bar {
+  padding: var(--space-m);
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid var(--border-color);
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Empty state */
+.config-empty-state {
+  padding: var(--space-l);
+  text-align: center;
+  color: var(--text-medium);
+}
+
+.config-empty-icon {
+  font-size: 36px;
+  margin-bottom: var(--space-s);
+  color: var(--border-color);
+}
+
+.config-empty-text {
+  font-size: var(--font-size-medium);
+  margin-bottom: var(--space-xs);
+}
+
+/* Menu contextuel */
+.config-context-menu {
+  position: fixed;
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-s);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 5px 0;
+  min-width: 160px;
+}
+
+.context-menu-item {
+  padding: 8px 15px;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.context-menu-item:hover {
+  background-color: rgba(0, 120, 212, 0.05);
+}
+
+.context-menu-item.danger {
+  color: #d9534f;
+}
+
+.context-menu-item.danger:hover {
+  background-color: rgba(217, 83, 79, 0.05);
+}
+
+.context-menu-item i {
+  margin-right: 8px;
+  width: 16px;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .config-list-item {
+    padding: var(--space-s);
+  }
+  
+  .config-item-header i {
+    font-size: 16px;
+  }
+  
+  .config-description {
+    font-size: 12px;
+    padding-left: calc(16px + var(--space-s));
+  }
+}

@@ -65,16 +65,6 @@ export default class TaskDriftDetails extends FeatureDetailsBase {
   renderBody(container) {
     const config = this.props.config?.taskDrift || {};
     container.className += ' task-drift-details';
-    
-    // Activer/désactiver la fonctionnalité
-    const enableSwitch = this.createSwitch(
-      'taskDriftEnabled',
-      config.enabled || false,
-      e => this.handleToggleEnable(e.target.checked),
-      'Activer la dérive des tâches',
-      'Affiche des indicateurs visuels pour les tâches qui dévient de leur estimation initiale'
-    );
-    container.appendChild(enableSwitch);
 
     // Section des seuils avec slider visuel
     const thresholdSection = this.createElement('div', { className: 'section' });
@@ -447,15 +437,5 @@ export default class TaskDriftDetails extends FeatureDetailsBase {
     card.appendChild(details);
     
     return card;
-  }
-
-  /**
-   * Gère l'activation/désactivation de la fonctionnalité
-   * @param {boolean} enabled - État d'activation
-   */
-  handleToggleEnable(enabled) {
-    if (this.props.onFeatureToggle) {
-      this.props.onFeatureToggle('task-drift', enabled);
-    }
   }
 }

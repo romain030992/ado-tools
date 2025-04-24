@@ -63,16 +63,6 @@ export default class QuickFilterDetails extends FeatureDetailsBase {
   renderBody(container) {
     const config = this.props.config?.quickFilter || {};
     
-    // Activer/désactiver la fonctionnalité
-    const enableSwitch = this.createSwitch(
-      'quickFilterEnabled',
-      config.enabled || false,
-      e => this.handleToggleEnable(e.target.checked),
-      'Activer le filtrage rapide',
-      'Ajoute des boutons pour filtrer rapidement par personne'
-    );
-    container.appendChild(enableSwitch);
-    
     // Liste des personnes
     const personList = this.createElement('div', { id: 'personList', className: 'person-list' });
     this.storeElement('personList', personList);
@@ -139,16 +129,6 @@ export default class QuickFilterDetails extends FeatureDetailsBase {
     // Sauvegarder automatiquement si demandé
     if (autoSave) {
       this.debouncedSaveChanges();
-    }
-  }
-
-  /**
-   * Gère l'activation/désactivation de la fonctionnalité
-   * @param {boolean} enabled - État d'activation
-   */
-  handleToggleEnable(enabled) {
-    if (this.props.onFeatureToggle) {
-      this.props.onFeatureToggle('quick-filter', enabled);
     }
   }
 }

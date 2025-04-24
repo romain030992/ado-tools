@@ -36,7 +36,6 @@ export default class FeatureDetailsBase extends Component {
     // Sauvegarder les valeurs originales pour la comparaison
     this.updateOriginalValues();
   }
-
   /**
    * Rend l'en-tête du composant
    */
@@ -44,12 +43,15 @@ export default class FeatureDetailsBase extends Component {
     const header = this.createElement('div', { className: 'feature-details-header' });
     
     // Titre
+    const titleContainer = this.createElement('div', { className: 'feature-title-container' });
     const title = this.createElement('h2', {}, {}, this.getTitle());
-    header.appendChild(title);
+    titleContainer.appendChild(title);
     
-    // Description
-    const description = this.createElement('p', { className: 'description' }, {}, this.getDescription());
-    header.appendChild(description);
+    // Description comme sous-titre
+    const description = this.createElement('p', { className: 'feature-subtitle' }, {}, this.getDescription());
+    titleContainer.appendChild(description);
+    
+    header.appendChild(titleContainer);
     
     this.container.appendChild(header);
   }

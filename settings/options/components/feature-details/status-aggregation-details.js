@@ -70,16 +70,6 @@ export default class StatusAggregationDetails extends FeatureDetailsBase {
   renderBody(container) {
     const config = this.props.config?.statusAggregation || {};
     
-    // Activer/désactiver la fonctionnalité
-    const enableSwitch = this.createSwitch(
-      'statusAggregationEnabled',
-      config.enabled || false,
-      e => this.handleToggleEnable(e.target.checked),
-      'Activer l\'agrégation par statut',
-      'Affiche des indicateurs de statut agrégés sur le backlog'
-    );
-    container.appendChild(enableSwitch);
-    
     // Champ pour le nom de la colonne
     const columnNameGroup = this.createElement('div', { className: 'field-container' });
     const columnNameLabel = this.createElement('label', { for: 'columnName' }, {}, 'Colonne à agréger');
@@ -176,16 +166,6 @@ export default class StatusAggregationDetails extends FeatureDetailsBase {
     // Sauvegarder automatiquement si demandé, sans debounce car c'est une action unique
     if (autoSave) {
       this.saveChanges();
-    }
-  }
-
-  /**
-   * Gère l'activation/désactivation de la fonctionnalité
-   * @param {boolean} enabled - État d'activation
-   */
-  handleToggleEnable(enabled) {
-    if (this.props.onFeatureToggle) {
-      this.props.onFeatureToggle('status-aggregation', enabled);
     }
   }
 }

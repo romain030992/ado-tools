@@ -21,18 +21,26 @@ export default class ConfigList extends Component {
     // Charger les configurations
     this.loadConfigurations();
   }
-
   /**
    * Charge les configurations
    */
   async loadConfigurations() {
     try {
       this.configs = await StorageService.getConfigurations();
+      
+      // Garantir qu'une configuration est toujours sélectionnée dès le chargement
+      if (this.configs.length > 0) {
+        // Si aucune configuration n'est sélectionnée ou si l'index est invalide
+        if (this.selectedConfigIndex === null || this.selectedConfigIndex >= this.configs.length) {
+          this.selectedConfigIndex = 0; // Toujours sélectionner la première configuration
+        }
+      }
+      
       this.render();
       
-      // Sélectionner la première configuration par défaut si disponible
-      if (this.configs.length > 0 && this.selectedConfigIndex === null) {
-        this.selectConfig(0);
+      // Déclencher la sélection après le rendu pour garantir que les détails sont affichés
+      if (this.configs.length > 0 && this.selectedConfigIndex !== null) {
+        this.selectConfig(this.selectedConfigIndex);
       }
     } catch (error) {
       console.error('Error loading configurations:', error);
@@ -41,13 +49,29 @@ export default class ConfigList extends Component {
 
   /**
    * Rend le composant dans le conteneur
-   */
-  render() {
+   */  render() {
     this.container.innerHTML = '';
+    
+    // Header avec titre et bouton d'ajout
+    const header = this.createElement('div', { className: 'config-list-header' });
     
     // Titre
     const title = this.createElement('h2', {}, {}, 'Configurations');
-    this.container.appendChild(title);
+    header.appendChild(title);
+    
+    // Bouton pour ajouter une configuration
+    const addButton = this.createElement('button', {
+      className: 'primary-button add-config-button'
+    }, {
+      click: () => this.showAddConfigModal()
+    });
+    
+    const addIcon = this.createElement('i', { className: 'fas fa-plus' });
+    addButton.appendChild(addIcon);
+    addButton.appendChild(document.createTextNode(' Ajouter'));
+    
+    header.appendChild(addButton);
+    this.container.appendChild(header);
     
     // Liste des configurations
     const configList = this.createElement('ul', { className: 'config-list' });
@@ -64,100 +88,100 @@ export default class ConfigList extends Component {
     
     this.container.appendChild(configList);
     
-    // Barre d'actions
-    const actionBar = this.createElement('div', { className: 'action-bar' });
-    
-    // Bouton pour ajouter une configuration
-    const addButton = this.createElement('button', {
-      className: 'primary-button'
-    }, {
-      click: () => this.showAddConfigModal()
-    });
-    
-    const addIcon = this.createElement('i', { className: 'fas fa-plus' });
-    addButton.appendChild(addIcon);
-    addButton.appendChild(document.createTextNode(' Ajouter'));
-    
-    actionBar.appendChild(addButton);
-    
-    this.container.appendChild(actionBar);
-    
     // Modale pour ajouter/modifier une configuration
     this.createConfigModal();
-  }
-
-  /**
+  }  /**
    * Crée un élément de liste pour une configuration
    * @param {Object} config - Configuration
    * @param {number} index - Index de la configuration
    * @returns {HTMLElement} - Élément de liste
-   */
+   */  
   createConfigListItem(config, index) {
     const isSelected = index === this.selectedConfigIndex;
     
+    // Créer l'élément de liste cliquable
     const listItem = this.createElement('li', {
       className: `config-list-item ${isSelected ? 'selected' : ''}`,
       'data-index': index,
+      title: 'Cliquer pour ouvrir cette configuration'
     }, {
-      click: () => this.selectConfig(index)
+      click: () => this.selectConfig(index),
+      contextmenu: (e) => {
+        e.preventDefault();
+        this.showContextMenu(e, index);
+      }
     });
     
-    // Icône
-    const icon = this.createElement('i', {
-      className: 'fas fa-cog'
-    });
-    listItem.appendChild(icon);
-    
-    // Nom de la configuration
+    // Nom de la configuration - directement dans l'élément de liste
     const name = this.createElement('span', {
       className: 'config-name'
-    }, {}, config.name || `Configuration ${index + 1}`);
+    }, {}, `${config.general.orga} - ${config.general.project}`);
     listItem.appendChild(name);
     
-    // Description de la configuration
-    if (config.description) {
-      const description = this.createElement('span', {
-        className: 'config-description'
-      }, {}, config.description);
-      listItem.appendChild(description);
-    }
+    return listItem;
+  }
+  
+  /**
+   * Affiche un menu contextuel pour les actions sur une configuration
+   * @param {Event} event - Événement de clic droit
+   * @param {number} index - Index de la configuration
+   */
+  showContextMenu(event, index) {
+    // Supprimer tout menu contextuel existant
+    const existingMenu = document.querySelector('.config-context-menu');
+    if (existingMenu) existingMenu.remove();
     
-    // Actions pour la configuration
-    const actions = this.createElement('div', { className: 'config-actions' });
+    // Créer le menu contextuel
+    const contextMenu = this.createElement('div', { 
+      className: 'config-context-menu' 
+    });
     
-    // Bouton pour éditer
-    const editButton = this.createElement('button', {
-      className: 'icon-button',
-      title: 'Modifier'
+    // Option Éditer
+    const editOption = this.createElement('div', { 
+      className: 'context-menu-item' 
     }, {
-      click: (e) => {
-        e.stopPropagation();
+      click: () => {
         this.showEditConfigModal(index);
+        contextMenu.remove();
       }
     });
     
     const editIcon = this.createElement('i', { className: 'fas fa-edit' });
-    editButton.appendChild(editIcon);
-    actions.appendChild(editButton);
+    editOption.appendChild(editIcon);
+    editOption.appendChild(document.createTextNode(' Modifier'));
+    contextMenu.appendChild(editOption);
     
-    // Bouton pour supprimer
-    const deleteButton = this.createElement('button', {
-      className: 'icon-button danger-button',
-      title: 'Supprimer'
+    // Option Supprimer
+    const deleteOption = this.createElement('div', { 
+      className: 'context-menu-item danger' 
     }, {
-      click: (e) => {
-        e.stopPropagation();
+      click: () => {
         this.confirmDeleteConfig(index);
+        contextMenu.remove();
       }
     });
     
     const deleteIcon = this.createElement('i', { className: 'fas fa-trash-alt' });
-    deleteButton.appendChild(deleteIcon);
-    actions.appendChild(deleteButton);
+    deleteOption.appendChild(deleteIcon);
+    deleteOption.appendChild(document.createTextNode(' Supprimer'));
+    contextMenu.appendChild(deleteOption);
     
-    listItem.appendChild(actions);
+    // Positionner le menu
+    contextMenu.style.top = `${event.pageY}px`;
+    contextMenu.style.left = `${event.pageX}px`;
     
-    return listItem;
+    // Ajouter le menu au document
+    document.body.appendChild(contextMenu);
+    
+    // Fermer le menu contextuel lors d'un clic en dehors
+    setTimeout(() => {
+      document.addEventListener('click', function closeMenu(e) {
+        if (!contextMenu.contains(e.target)) {
+          contextMenu.remove();
+          document.removeEventListener('click', closeMenu);
+        }
+      });
+    }, 0);
   }
 
   /**

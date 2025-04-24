@@ -14,16 +14,19 @@ export default class FeatureList extends Component {
     this.selectedFeature = props.selectedFeature || '';
     this.config = props.config || {}; // S'assurer que config est au moins un objet vide
   }
-
   /**
    * Rend le composant dans le conteneur
-   */
-  render() {
+   */  render() {
     this.container.innerHTML = '';
 
+    // Header avec titre (similaire à la liste des configurations)
+    const header = this.createElement('div', { className: 'feature-list-header' });
+    
     // Titre
     const title = this.createElement('h2', {}, {}, 'Fonctionnalités');
-    this.container.appendChild(title);
+    header.appendChild(title);
+    
+    this.container.appendChild(header);
     
     // Liste des fonctionnalités
     const featureList = this.createElement('ul', { className: 'feature-list' });
@@ -41,6 +44,11 @@ export default class FeatureList extends Component {
       { id: 'task-drift', name: 'Dérive des tâches', icon: 'fa-tasks', toggleable: true, enabled: (config.taskDrift && config.taskDrift.enabled) || false }
     ];
     
+    // Vérifier si aucune fonctionnalité n'est sélectionnée, sélectionner 'general' par défaut
+    if (!this.selectedFeature) {
+      this.selectedFeature = 'general';
+    }
+    
     // Créer un élément de liste pour chaque fonctionnalité
     features.forEach(feature => {
       const featureItem = this.createFeatureItem(feature);
@@ -48,38 +56,44 @@ export default class FeatureList extends Component {
     });
     
     this.container.appendChild(featureList);
+    
+    // Après le rendu, s'assurer qu'une fonctionnalité est sélectionnée visuellement
+    setTimeout(() => {
+      if (this.selectedFeature) {
+        this.handleFeatureSelect(this.selectedFeature);
+      }
+    }, 0);
   }
   
   /**
    * Crée un élément pour une fonctionnalité
    * @param {Object} feature - Données de la fonctionnalité
    * @returns {HTMLElement} - Élément créé
-   */
-  createFeatureItem(feature) {
+   */  createFeatureItem(feature) {
     const isSelected = feature.id === this.selectedFeature;
     
+    // Créer l'élément de liste cliquable simplifié
     const featureItem = this.createElement('li', {
-      className: `feature-item ${isSelected ? 'selected' : ''}`,
+      className: `feature-item ${isSelected ? 'selected' : ''} ${feature.toggleable ? 'has-toggle' : ''}`,
       'data-feature': feature.id
     }, {
       click: (e) => {
         // Ne pas réagir aux clics sur le toggle
-        if (e.target.tagName === 'INPUT' || e.target.classList.contains('switch-toggle')) {
+        if (e.target.tagName === 'INPUT' || e.target.classList.contains('toggle-slider')) {
           return;
         }
         this.handleFeatureSelect(feature.id);
       }
     });
-    
-    // Icône
+      // Icône directement dans l'élément principal
     const icon = this.createElement('i', { className: `fas ${feature.icon}` });
     featureItem.appendChild(icon);
     
-    // Nom de la fonctionnalité
+    // Nom de la fonctionnalité (entre l'icône et le toggle)
     const featureName = this.createElement('span', { className: 'feature-name' }, {}, feature.name);
     featureItem.appendChild(featureName);
-    
-    // Toggle pour activer/désactiver la fonctionnalité
+
+    // Toggle pour activer/désactiver la fonctionnalité (avant le titre pour qu'il apparaisse à droite avec le style flex)
     if (feature.toggleable) {
       const switchContainer = this.createElement('label', {
         className: 'toggle-container'
@@ -99,6 +113,7 @@ export default class FeatureList extends Component {
       switchContainer.appendChild(switchInput);
       switchContainer.appendChild(switchSlider);
       
+      // Ajouter le toggle à la fin (pour qu'il soit à droite)
       featureItem.appendChild(switchContainer);
     }
     

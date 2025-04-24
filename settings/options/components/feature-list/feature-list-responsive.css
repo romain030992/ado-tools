@@ -1,0 +1,158 @@
+/* Styles for Responsive Feature List component */
+
+/* Header styles - aligné avec le style du header de config-list-responsive.css */
+.feature-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-m);
+  border-bottom: 1px solid var(--border-color);
+  background-color: rgba(0, 0, 0, 0.02);
+  height: 56px; /* Hauteur fixe correspondant à celle du header de configuration */
+  box-sizing: border-box;
+}
+
+.feature-list-header h2 {
+  margin: 0;
+  padding: 0;
+  color: var(--text-dark);
+  font-size: var(--font-size-medium);
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Item styles - homogénéisés avec config-list */
+.feature-item {
+  display: flex;
+  align-items: center; /* Centrage vertical */
+  height: 50px; /* Hauteur fixe */
+  padding: 0 var(--space-m);
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.feature-item:last-child {
+  border-bottom: none;
+}
+
+.feature-item:hover {
+  background-color: rgba(0, 120, 212, 0.05);
+}
+
+.feature-item.selected {
+  background-color: rgba(0, 120, 212, 0.1);
+  border-left: 3px solid var(--primary-color);
+}
+
+.feature-item:not(.has-toggle)::after {
+  display: block;
+}
+
+.feature-item:hover::after {
+  opacity: 1;
+  color: var(--primary-color);
+}
+
+/* Icône de fonctionnalité */
+.feature-item i {
+  margin-right: var(--space-m);
+  font-size: 18px;
+  color: var(--primary-color);
+}
+
+/* Nom de la fonctionnalité */
+.feature-name {
+  font-weight: 500;
+  font-size: var(--font-size-base);
+  color: var(--text-dark);
+  flex: 1; /* Prend tout l'espace disponible */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left; /* Alignement à gauche */
+}
+
+.feature-description {
+  color: var(--text-medium);
+  font-size: var(--font-size-small);
+  padding-left: calc(18px + var(--space-m)); /* Aligner avec l'icône */
+  /* Text overflow handling */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Toggle style */
+.toggle-container {
+  margin-left: auto; /* Pousse le toggle à droite */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  min-width: 40px;
+}
+
+/* Style de l'interrupteur */
+.toggle-slider {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 20px;
+  transition: .4s;
+  cursor: pointer;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: .4s;
+}
+
+input:checked + .toggle-slider {
+  background-color: var(--primary-color);
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(16px);
+}
+
+/* Cacher le input checkbox */
+.toggle-container input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .feature-item {
+    padding: var(--space-s);
+  }
+  
+  .feature-item i {
+    font-size: 16px;
+  }
+  
+  .feature-description {
+    font-size: 12px;
+  }
+}

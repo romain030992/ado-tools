@@ -7,8 +7,11 @@
 
 .feature-details-header {
   display: flex;
-  align-items: center;
   margin-bottom: var(--space-l);
+}
+
+.feature-title-container {
+  flex: 1;
 }
 
 .feature-details-header .feature-icon {
@@ -27,17 +30,20 @@
   font-size: 20px;
 }
 
-.feature-details-header .feature-title {
+.feature-details-header h2 {
   margin: 0;
   padding: 0;
   border: none;
+  color: var(--text-dark);
+  font-size: var(--font-size-large);
 }
 
-.feature-details-header .feature-description {
+.feature-details-header .feature-subtitle {
   color: var(--text-medium);
   margin: 0;
-  margin-top: var(--space-xs);
-  font-size: var(--font-size-base);
+  margin-top: 5px;
+  font-size: var(--font-size-small);
+  font-weight: normal;
 }
 
 .feature-details .section {
