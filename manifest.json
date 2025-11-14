@@ -5,6 +5,12 @@
     "description": "Boîte à outils Azure DevOps",
     "permissions": ["tabs", "scripting", "activeTab", "storage"],
     "host_permissions": ["https://dev.azure.com/*"],
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "ado-tools@romain030992.github.io",
+        "strict_min_version": "109.0"
+      }
+    },
     "content_security_policy": {
       "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:;"
     },

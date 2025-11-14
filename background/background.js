@@ -74,7 +74,10 @@ async function injectScriptsLoader(tabId, scriptPaths, config) {
   `;
   
   // Injecter le loader qui va charger tous nos scripts
-  await chrome.scripting.executeScript({
+  // Note: 'world' parameter is only supported in Chromium browsers
+  // For Firefox, the script will still be injected but in the content script context
+  // However, since we're creating a script element, it will run in the page context anyway
+  const scriptConfig = {
     target: { tabId: tabId },
     func: (code) => {
       const script = document.createElement('script');
@@ -82,9 +85,23 @@ async function injectScriptsLoader(tabId, scriptPaths, config) {
       (document.head || document.documentElement).appendChild(script);
       script.remove(); // Le code est exécuté immédiatement donc on peut retirer l'élément
     },
-    args: [loaderCode],
-    world: 'MAIN'
-  });
+    args: [loaderCode]
+  };
+  
+  // Add 'world' parameter only for Chromium (Chrome/Edge)
+  // Firefox doesn't support this parameter but the injection will still work
+  if (typeof chrome !== 'undefined' && chrome.scripting) {
+    try {
+      // Try with world parameter (Chromium)
+      await chrome.scripting.executeScript({
+        ...scriptConfig,
+        world: 'MAIN'
+      });
+    } catch (error) {
+      // Fallback without world parameter (Firefox)
+      await chrome.scripting.executeScript(scriptConfig);
+    }
+  }
 }
 
 // Détecter les mises à jour des onglets
