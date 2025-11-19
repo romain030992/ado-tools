@@ -95,7 +95,7 @@ export default MyNewFeature;
 5. The extension is now installed and ready to use
 
 **Note:** 
-- The extension uses Manifest V2 for compatibility with Firefox
+- The extension uses Manifest V3 and requires Firefox 109+ (first version with Manifest V3 service worker support)
 - For Firefox, the extension will be temporary and will be removed when Firefox restarts
 - For permanent installation, the extension needs to be signed by Mozilla or you need to use Firefox Developer Edition or Nightly with `xpinstall.signatures.required` set to `false` in `about:config`
 

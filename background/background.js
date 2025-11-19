@@ -1,5 +1,5 @@
-// Description: Script de fond pour l'extension avec architecture modulaire
-// Compatible avec Manifest V2 pour Firefox et Chrome
+// Description: Script de fond pour l'extension Chrome avec architecture modulaire
+// Utilise les modules ES (import/export)
 
 /**
  * Fonction pour injecter une fonction de chargement de script
@@ -8,10 +8,11 @@
  * @param {Array<string>} scriptPaths - Chemins des scripts à charger
  * @param {Object} config - Configuration à transmettre aux scripts
  */
-function injectScriptsLoader(tabId, scriptPaths, config) {
-  // Injecter d'abord le CSS commun (Manifest V2 API)
-  chrome.tabs.insertCSS(tabId, {
-    file: 'injected-content.css'
+async function injectScriptsLoader(tabId, scriptPaths, config) {
+  // Injecter d'abord le CSS commun
+  await chrome.scripting.insertCSS({
+    target: { tabId: tabId },
+    files: ['injected-content.css']
   });
 
   // Liste des fichiers de base toujours nécessaires
@@ -72,19 +73,36 @@ function injectScriptsLoader(tabId, scriptPaths, config) {
     })();
   `;
   
-  // Injecter le loader qui va charger tous nos scripts (Manifest V2 API)
-  // Cette méthode fonctionne sur Firefox et Chrome
-  chrome.tabs.executeScript(tabId, {
-    code: `
-      (function() {
+  // Injecter le loader qui va charger tous nos scripts
+  // Note: 'world: MAIN' is supported in Chrome but not in Firefox
+  // Firefox will inject in ISOLATED world, but the script creates a <script> tag which runs in MAIN world
+  try {
+    await chrome.scripting.executeScript({
+      target: { tabId: tabId },
+      func: (code) => {
         const script = document.createElement('script');
-        script.textContent = ${JSON.stringify(loaderCode)};
+        script.textContent = code;
+        (document.head || document.documentElement).appendChild(script);
+        script.remove(); // Le code est exécuté immédiatement donc on peut retirer l'élément
+      },
+      args: [loaderCode],
+      world: 'MAIN'
+    });
+  } catch (error) {
+    // Fallback for Firefox: inject without 'world' parameter
+    // The script will still run in MAIN world due to the <script> tag creation
+    console.log('Fallback injection (Firefox):', error.message);
+    await chrome.scripting.executeScript({
+      target: { tabId: tabId },
+      func: (code) => {
+        const script = document.createElement('script');
+        script.textContent = code;
         (document.head || document.documentElement).appendChild(script);
         script.remove();
-      })();
-    `,
-    runAt: 'document_end'
-  });
+      },
+      args: [loaderCode]
+    });
+  }
 }
 
 // Détecter les mises à jour des onglets
