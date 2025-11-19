@@ -74,17 +74,35 @@ async function injectScriptsLoader(tabId, scriptPaths, config) {
   `;
   
   // Injecter le loader qui va charger tous nos scripts
-  await chrome.scripting.executeScript({
-    target: { tabId: tabId },
-    func: (code) => {
-      const script = document.createElement('script');
-      script.textContent = code;
-      (document.head || document.documentElement).appendChild(script);
-      script.remove(); // Le code est exécuté immédiatement donc on peut retirer l'élément
-    },
-    args: [loaderCode],
-    world: 'MAIN'
-  });
+  // Note: 'world: MAIN' is supported in Chrome but not in Firefox
+  // Firefox will inject in ISOLATED world, but the script creates a <script> tag which runs in MAIN world
+  try {
+    await chrome.scripting.executeScript({
+      target: { tabId: tabId },
+      func: (code) => {
+        const script = document.createElement('script');
+        script.textContent = code;
+        (document.head || document.documentElement).appendChild(script);
+        script.remove(); // Le code est exécuté immédiatement donc on peut retirer l'élément
+      },
+      args: [loaderCode],
+      world: 'MAIN'
+    });
+  } catch (error) {
+    // Fallback for Firefox: inject without 'world' parameter
+    // The script will still run in MAIN world due to the <script> tag creation
+    console.log('Fallback injection (Firefox):', error.message);
+    await chrome.scripting.executeScript({
+      target: { tabId: tabId },
+      func: (code) => {
+        const script = document.createElement('script');
+        script.textContent = code;
+        (document.head || document.documentElement).appendChild(script);
+        script.remove();
+      },
+      args: [loaderCode]
+    });
+  }
 }
 
 // Détecter les mises à jour des onglets

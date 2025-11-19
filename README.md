@@ -1,6 +1,6 @@
 # Azure DevOps Tools
 
-A Chrome extension that enhances the Azure DevOps user experience with additional features for sprint backlogs and more.
+A browser extension for Chrome, Edge, and Firefox that enhances the Azure DevOps user experience with additional features for sprint backlogs and more.
 
 ## Features
 
@@ -78,11 +78,26 @@ export default MyNewFeature;
 
 ## Installation and Development
 
+### Chrome/Edge Installation
+
 1. Clone this repository
-2. Open Chrome and go to `chrome://extensions/`
+2. Open Chrome and go to `chrome://extensions/` (or Edge at `edge://extensions/`)
 3. Enable "Developer mode"
 4. Click on "Load unpacked extension" and select the project folder
 5. The extension is now installed and ready to use
+
+### Firefox Installation
+
+1. Clone this repository
+2. Open Firefox and go to `about:debugging#/runtime/this-firefox`
+3. Click on "Load Temporary Add-on"
+4. Navigate to the project folder and select the `manifest.json` file
+5. The extension is now installed and ready to use
+
+**Note:** 
+- The extension uses Manifest V3 and requires Firefox 109+ (first version with Manifest V3 service worker support)
+- For Firefox, the extension will be temporary and will be removed when Firefox restarts
+- For permanent installation, the extension needs to be signed by Mozilla or you need to use Firefox Developer Edition or Nightly with `xpinstall.signatures.required` set to `false` in `about:config`
 
 ## Configuration
 
