@@ -94,7 +94,10 @@ export default MyNewFeature;
 4. Navigate to the project folder and select the `manifest.json` file
 5. The extension is now installed and ready to use
 
-**Note:** For Firefox, the extension will be temporary and will be removed when Firefox restarts. For permanent installation, the extension needs to be signed by Mozilla or you need to use Firefox Developer Edition or Nightly with `xpinstall.signatures.required` set to `false` in `about:config`.
+**Note:** 
+- The extension uses Manifest V2 for compatibility with Firefox
+- For Firefox, the extension will be temporary and will be removed when Firefox restarts
+- For permanent installation, the extension needs to be signed by Mozilla or you need to use Firefox Developer Edition or Nightly with `xpinstall.signatures.required` set to `false` in `about:config`
 
 ## Configuration
 

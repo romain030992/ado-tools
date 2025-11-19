@@ -1,5 +1,5 @@
-// Description: Script de fond pour l'extension Chrome avec architecture modulaire
-// Utilise les modules ES (import/export)
+// Description: Script de fond pour l'extension avec architecture modulaire
+// Compatible avec Manifest V2 pour Firefox et Chrome
 
 /**
  * Fonction pour injecter une fonction de chargement de script
@@ -8,11 +8,10 @@
  * @param {Array<string>} scriptPaths - Chemins des scripts à charger
  * @param {Object} config - Configuration à transmettre aux scripts
  */
-async function injectScriptsLoader(tabId, scriptPaths, config) {
-  // Injecter d'abord le CSS commun
-  await chrome.scripting.insertCSS({
-    target: { tabId: tabId },
-    files: ['injected-content.css']
+function injectScriptsLoader(tabId, scriptPaths, config) {
+  // Injecter d'abord le CSS commun (Manifest V2 API)
+  chrome.tabs.insertCSS(tabId, {
+    file: 'injected-content.css'
   });
 
   // Liste des fichiers de base toujours nécessaires
@@ -73,35 +72,19 @@ async function injectScriptsLoader(tabId, scriptPaths, config) {
     })();
   `;
   
-  // Injecter le loader qui va charger tous nos scripts
-  // Note: 'world' parameter is only supported in Chromium browsers
-  // For Firefox, the script will still be injected but in the content script context
-  // However, since we're creating a script element, it will run in the page context anyway
-  const scriptConfig = {
-    target: { tabId: tabId },
-    func: (code) => {
-      const script = document.createElement('script');
-      script.textContent = code;
-      (document.head || document.documentElement).appendChild(script);
-      script.remove(); // Le code est exécuté immédiatement donc on peut retirer l'élément
-    },
-    args: [loaderCode]
-  };
-  
-  // Add 'world' parameter only for Chromium (Chrome/Edge)
-  // Firefox doesn't support this parameter but the injection will still work
-  if (typeof chrome !== 'undefined' && chrome.scripting) {
-    try {
-      // Try with world parameter (Chromium)
-      await chrome.scripting.executeScript({
-        ...scriptConfig,
-        world: 'MAIN'
-      });
-    } catch (error) {
-      // Fallback without world parameter (Firefox)
-      await chrome.scripting.executeScript(scriptConfig);
-    }
-  }
+  // Injecter le loader qui va charger tous nos scripts (Manifest V2 API)
+  // Cette méthode fonctionne sur Firefox et Chrome
+  chrome.tabs.executeScript(tabId, {
+    code: `
+      (function() {
+        const script = document.createElement('script');
+        script.textContent = ${JSON.stringify(loaderCode)};
+        (document.head || document.documentElement).appendChild(script);
+        script.remove();
+      })();
+    `,
+    runAt: 'document_end'
+  });
 }
 
 // Détecter les mises à jour des onglets
